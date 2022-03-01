@@ -3,6 +3,7 @@
     <string name="btn_start_txt">Start a New Game</string>
     <string name="btn_pokedex_txt">Pokédex</string>
     <string name="btn_stats_txt">Game Statistics</string>
+    <string name="game_et_pokemon_hint">Pokémon Name</string>
     <string name="game_btn_guess_pokemon">Guess Pokémon</string>
     <string name="game_label_gen">Generation</string>
     <string name="game_label_t1">Type 1</string>
@@ -49,5 +50,10 @@
         <item>Stage 1</item>
         <item>Stage 2</item>
         <item>Stage 3</item>
+    </string-array>
+    <string-array name="pokemon_array">
+        <item>Bulbasaur</item>
+        <item>Ivysaur</item>
+        <item>Venusaur</item>
     </string-array>
 </resources>

@@ -3,6 +3,7 @@ package edu.us.ischool.guessemall
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Spinner
 
 class game : AppCompatActivity() {
@@ -10,6 +11,17 @@ class game : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
+        // fill in autocomplete options
+        // Get a reference to the AutoCompleteTextView in the layout
+        val textView = findViewById(R.id.tvAutoComplete_Pokemon) as AutoCompleteTextView
+        // Get the string array
+        val countries: Array<out String> = resources.getStringArray(R.array.pokemon_array)
+        // Create the adapter and set it to the AutoCompleteTextView
+        ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, countries).also { adapter ->
+            textView.setAdapter(adapter)
+        }
+
+        // fill in spinner options (default: Generation)
         val spinner: Spinner = findViewById(R.id.spinner)
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter.createFromResource(

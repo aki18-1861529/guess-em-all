@@ -23,14 +23,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/autoCompleteTextView_Pokemon"
+        app:layout_constraintBottom_toTopOf="@id/tvAutoComplete_Pokemon"
         app:srcCompat="@drawable/logo" />
 
     <AutoCompleteTextView
-        android:id="@+id/autoCompleteTextView_Pokemon"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvAutoComplete_Pokemon"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="AutoCompleteTextView"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:hint="@string/game_et_pokemon_hint"
         app:layout_constraintTop_toBottomOf="@id/imgGuessPokemon"
         app:layout_constraintBottom_toTopOf="@id/btnGuessPokemon"
         app:layout_constraintEnd_toEndOf="parent"
@@ -41,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/game_btn_guess_pokemon"
-        app:layout_constraintTop_toBottomOf="@id/autoCompleteTextView_Pokemon"
+        app:layout_constraintTop_toBottomOf="@id/tvAutoComplete_Pokemon"
         app:layout_constraintBottom_toTopOf="@id/divider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
