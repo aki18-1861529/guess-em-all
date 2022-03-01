@@ -3,4 +3,51 @@
     <string name="btn_start_txt">Start a New Game</string>
     <string name="btn_pokedex_txt">Pokédex</string>
     <string name="btn_stats_txt">Game Statistics</string>
+    <string name="game_btn_guess_pokemon">Guess Pokémon</string>
+    <string name="game_label_gen">Generation</string>
+    <string name="game_label_t1">Type 1</string>
+    <string name="game_label_t2">Type 2</string>
+    <string name="game_label_evo">Evolution</string>
+    <string name="game_label_guess_part">Guess the Pokémon\'s </string>
+    <string name="game_btn_guess_gen">Guess Generation</string>
+    <string name="game_btn_guess_t1">Guess Type 1</string>
+    <string name="game_btn_guess_t2">Guess Type 2</string>
+    <string name="game_btn_guess_evo">Guess Evolution</string>
+    <string-array name="generations_array">
+        <item>Gen I: Red/Green</item>
+        <item>Gen II: Gold/Silver</item>
+        <item>Gen III: Ruby/Sapphire/Emerald</item>
+        <item>Gen IV: Diamond/Pearl/Platinum</item>
+        <item>Gen V: Black/White</item>
+        <item>Gen VI: X/Y</item>
+        <item>Gen VII: Sun/Moon</item>
+        <item>Gen VIII: Sword/Shield</item>
+    </string-array>
+    <string-array name="type_array">
+        <item>None</item>
+        <item>Normal</item>
+        <item>Fire</item>
+        <item>Water</item>
+        <item>Grass</item>
+        <item>Electric</item>
+        <item>Ice</item>
+        <item>Fighting</item>
+        <item>Poison</item>
+        <item>Ground</item>
+        <item>Flying</item>
+        <item>Psychic</item>
+        <item>Bug</item>
+        <item>Rock</item>
+        <item>Ghost</item>
+        <item>Dark</item>
+        <item>Dragon</item>
+        <item>Steel</item>
+        <item>Fairy</item>
+    </string-array>
+    <string-array name="evolution_array">
+        <item>None</item>
+        <item>Stage 1</item>
+        <item>Stage 2</item>
+        <item>Stage 3</item>
+    </string-array>
 </resources>
