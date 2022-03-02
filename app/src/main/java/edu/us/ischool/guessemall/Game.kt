@@ -1,12 +1,14 @@
 package edu.us.ischool.guessemall
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Button
 import android.widget.Spinner
 
-class game : AppCompatActivity() {
+class Game : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
@@ -33,6 +35,12 @@ class game : AppCompatActivity() {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             // Apply the adapter to the spinner
             spinner.adapter = adapter
+        }
+
+        // Show results page with pokemon stats
+        findViewById<Button>(R.id.btnGuessPokemon).setOnClickListener {
+            val intent = Intent(this, PokemonStats::class.java)
+            startActivity(intent)
         }
     }
 }
