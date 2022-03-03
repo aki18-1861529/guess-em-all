@@ -3,10 +3,8 @@ package edu.us.ischool.guessemall
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.Button
-import android.widget.Spinner
+import android.widget.*
+import org.w3c.dom.Text
 
 class Game : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,12 +34,47 @@ class Game : AppCompatActivity() {
             // Apply the adapter to the spinner
             spinner.adapter = adapter
         }
+        findViewById<ImageView>(R.id.imgGuessGen).setOnClickListener {
+            populateSpinner(R.array.generations_array)
+            findViewById<Button>(R.id.btnGuessPart).text = "Guess Generation"
+            findViewById<TextView>(R.id.tvCurrentGuessLabel).text ="Generation"
+        }
+        findViewById<ImageView>(R.id.imgGuessType1).setOnClickListener {
+            populateSpinner(R.array.type_array)
+            findViewById<Button>(R.id.btnGuessPart).text = "Guess Type 1"
+            findViewById<TextView>(R.id.tvCurrentGuessLabel).text ="Type 1"
+        }
+        findViewById<ImageView>(R.id.imgGuessType2).setOnClickListener {
+            populateSpinner(R.array.type_array)
+            findViewById<Button>(R.id.btnGuessPart).text = "Guess Type 2"
+            findViewById<TextView>(R.id.tvCurrentGuessLabel).text ="Type 2"
+        }
+        findViewById<ImageView>(R.id.imgGuessEvo).setOnClickListener {
+            populateSpinner(R.array.evolution_array)
+            findViewById<Button>(R.id.btnGuessPart).text = "Guess Evolution"
+            findViewById<TextView>(R.id.tvCurrentGuessLabel).text ="Evolution"
+        }
 
         // Show results page with pokemon stats
         findViewById<Button>(R.id.btnGuessPokemon).setOnClickListener {
             val intent = Intent(this,
                 PokedexEntry::class.java)
             startActivity(intent)
+        }
+    }
+
+    fun populateSpinner(contentArrayID: Int) {
+        val spinner: Spinner = findViewById(R.id.spinner)
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter.createFromResource(
+            this,
+            contentArrayID,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            // Apply the adapter to the spinner
+            spinner.adapter = adapter
         }
     }
 }

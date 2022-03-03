@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/aribe/Documents/School/INFO448/guess-em-all/app/src/main/res/layout/activity_game.xml" value="0.33" />
+        <entry key="..\:/Users/aribe/Documents/School/INFO448/guess-em-all/app/src/main/res/layout/activity_game_stats.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/aribe/Documents/School/INFO448/guess-em-all/app/src/main/res/layout/activity_main.xml" value="0.18819655521783182" />
+        <entry key="..\:/Users/aribe/Documents/School/INFO448/guess-em-all/app/src/main/res/layout/activity_pokedex.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/aribe/Documents/School/INFO448/guess-em-all/app/src/main/res/layout/activity_pokemon_stats.xml" value="0.38697916666666665" />
+        <entry key="..\:/Users/aribe/Documents/School/INFO448/guess-em-all/app/src/main/res/layout/activity_splash_screen.xml" value="0.38697916666666665" />
         <entry key="..\:/Users/kia20/Desktop/INFO 448/guess-em-all/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.221875" />
         <entry key="..\:/Users/kia20/Desktop/INFO 448/guess-em-all/app/src/main/res/drawable/ic_launcher_background.xml" value="0.221875" />
         <entry key="..\:/Users/kia20/Desktop/INFO 448/guess-em-all/app/src/main/res/layout/activity_game.xml" value="0.29030797101449274" />
