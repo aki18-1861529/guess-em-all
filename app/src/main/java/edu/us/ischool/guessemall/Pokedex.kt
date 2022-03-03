@@ -17,7 +17,7 @@ class Pokedex : AppCompatActivity() {
         val adapter = GridAdapter(this)
         pokeGrid.adapter = adapter
 
-        val layoutManager = GridLayoutManager(this, 3)
+        val layoutManager = GridLayoutManager(this, 4)
         pokeGrid.layoutManager = layoutManager
     }
 }
