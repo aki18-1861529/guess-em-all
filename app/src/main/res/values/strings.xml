@@ -14,6 +14,7 @@
     <string name="game_btn_guess_t1">Guess Type 1</string>
     <string name="game_btn_guess_t2">Guess Type 2</string>
     <string name="game_btn_guess_evo">Guess Evolution</string>
+    <string name="pokeentry_label_type">Type</string>
     <string-array name="generations_array">
         <item>Gen I: Red/Green</item>
         <item>Gen II: Gold/Silver</item>
