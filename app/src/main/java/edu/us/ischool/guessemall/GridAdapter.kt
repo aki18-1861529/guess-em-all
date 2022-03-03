@@ -29,7 +29,7 @@ class GridHolder(row: View) : RecyclerView.ViewHolder(row) {
 }
 
 class GridAdapter(val activity: Activity) : RecyclerView.Adapter<GridHolder>() {
-    private val pokemon = arrayOf("Pikachu", "Bulbasaur", "Charmander", "Squirtle", "Ampharos", "Cacturne", "Pinsr", "Appleton", "Toxtricity")
+    private val pokemon = arrayOf("Pikachu", "Bulbasaur", "Charmander", "Squirtle", "Ampharos", "Cacturne", "Pinsr", "Appletun", "Toxtricity")
     override fun getItemCount() : Int { return pokemon.size }
 
     // recycler view inside activity

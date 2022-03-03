@@ -39,7 +39,8 @@ class Game : AppCompatActivity() {
 
         // Show results page with pokemon stats
         findViewById<Button>(R.id.btnGuessPokemon).setOnClickListener {
-            val intent = Intent(this, PokemonStats::class.java)
+            val intent = Intent(this,
+                PokedexEntry::class.java)
             startActivity(intent)
         }
     }
