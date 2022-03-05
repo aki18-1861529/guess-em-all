@@ -1,11 +1,16 @@
 package edu.us.ischool.guessemall
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
+import android.app.Application
+import android.util.Log
 
-class AppActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_app)
+class App : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        Log.i("QuizApp", "QuizApp is loaded and running!")
+    }
+
+
+    companion object {
+        val data = DataRepository()
     }
 }

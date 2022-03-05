@@ -8,55 +8,89 @@
     tools:context=".Pokedex">
 
     <TextView
-        android:id="@+id/name_label"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="101dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="1dp"
         android:layout_weight="1"
         android:text="Pokemon Name"
-        tools:layout_editor_absoluteX="287dp"
-        tools:layout_editor_absoluteY="101dp" />
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvPokeNumber"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imgPokemonArt"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        app:srcCompat="@drawable/undiscovered"
-        tools:layout_editor_absoluteX="26dp"
-        tools:layout_editor_absoluteY="111dp" />
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="111dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="520dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tableLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/undiscovered" />
 
     <ImageView
         android:id="@+id/imgCaught"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        app:srcCompat="@drawable/pokeball"
-        tools:layout_editor_absoluteX="157dp"
-        tools:layout_editor_absoluteY="95dp" />
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="94dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        app:layout_constraintEnd_toStartOf="@+id/imgSprite"
+        app:layout_constraintStart_toEndOf="@+id/imgPokemonArt"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/pokeball" />
 
     <ImageView
         android:id="@+id/imgSprite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/sprite_example"
-        tools:layout_editor_absoluteX="185dp"
-        tools:layout_editor_absoluteY="90dp" />
+        android:layout_marginStart="3dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        app:layout_constraintEnd_toStartOf="@+id/tvPokeNumber"
+        app:layout_constraintStart_toEndOf="@+id/imgCaught"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/sprite_example" />
 
     <TextView
         android:id="@+id/tvPokeNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="101dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="1dp"
         android:text="No. 001"
-        tools:layout_editor_absoluteX="225dp"
-        tools:layout_editor_absoluteY="101dp" />
+        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        app:layout_constraintEnd_toStartOf="@+id/name"
+        app:layout_constraintStart_toEndOf="@+id/imgSprite"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TableLayout
+        android:id="@+id/tableLayout"
         android:layout_width="283dp"
         android:layout_height="609dp"
-        tools:layout_editor_absoluteX="127dp"
-        tools:layout_editor_absoluteY="121dp">
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgPokemonArt"
+        app:layout_constraintTop_toBottomOf="@+id/name">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/tvPokeType"
@@ -70,13 +104,11 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-        </TableRow>
+            android:layout_height="match_parent"></TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-        </TableRow>
+            android:layout_height="match_parent"></TableRow>
     </TableLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
