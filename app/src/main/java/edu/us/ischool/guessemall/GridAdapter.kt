@@ -53,6 +53,7 @@ class GridAdapter(val activity: Activity) : RecyclerView.Adapter<GridHolder>() {
 
             Log.i("MainActivity", intent.extras.toString())
             activity.startActivity(intent)
+            activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
     }
 }

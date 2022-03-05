@@ -61,6 +61,7 @@ class Game : AppCompatActivity() {
             val intent = Intent(this,
                 PokedexEntry::class.java)
             startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
     }
 
@@ -77,5 +78,10 @@ class Game : AppCompatActivity() {
             // Apply the adapter to the spinner
             spinner.adapter = adapter
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
     }
 }

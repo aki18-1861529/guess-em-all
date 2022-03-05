@@ -19,4 +19,9 @@ class PokedexEntry : AppCompatActivity() {
         val nameLabel: TextView = findViewById(R.id.name_label)
         nameLabel.text = name
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+    }
 }

@@ -20,4 +20,9 @@ class Pokedex : AppCompatActivity() {
         val layoutManager = GridLayoutManager(this, 4)
         pokeGrid.layoutManager = layoutManager
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+    }
 }
