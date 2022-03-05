@@ -89,7 +89,9 @@ class GridAdapter(val activity: Activity) : RecyclerView.Adapter<GridHolder>() {
                 // adding extras to intent
                 intent.putExtra("EXTRA_INDEX", position)
 
+                Log.i("MainActivity", intent.extras.toString())
                 activity.startActivity(intent)
+                activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             }
         }
     }

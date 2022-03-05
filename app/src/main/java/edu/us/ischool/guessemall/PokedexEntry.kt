@@ -59,4 +59,9 @@ class PokedexEntry : AppCompatActivity() {
 
         return "No. $result"
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+    }
 }
