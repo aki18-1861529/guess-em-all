@@ -7,76 +7,142 @@
     android:layout_height="match_parent"
     tools:context=".Pokedex">
 
-    <TextView
-        android:id="@+id/name_label"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Pokemon Name"
-        tools:layout_editor_absoluteX="287dp"
-        tools:layout_editor_absoluteY="101dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias=".25" >
 
-    <ImageView
-        android:id="@+id/imgPokemonArt"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:srcCompat="@drawable/undiscovered"
-        tools:layout_editor_absoluteX="26dp"
-        tools:layout_editor_absoluteY="111dp" />
+        <TextView
+            android:id="@+id/name_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Pokemon Name"
+            app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvPokeNumber"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imgCaught"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        app:srcCompat="@drawable/pokeball"
-        tools:layout_editor_absoluteX="157dp"
-        tools:layout_editor_absoluteY="95dp" />
+        <ImageView
+            android:id="@+id/imgPokemonArt"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:layout_constraintEnd_toStartOf="@+id/imgDiscoveredStatus"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tableLayout"
+            app:srcCompat="@drawable/undiscovered" />
 
-    <ImageView
-        android:id="@+id/imgSprite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/sprite_example"
-        tools:layout_editor_absoluteX="185dp"
-        tools:layout_editor_absoluteY="90dp" />
+        <ImageView
+            android:id="@+id/imgDiscoveredStatus"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+            app:layout_constraintEnd_toStartOf="@+id/imgSprite"
+            app:layout_constraintStart_toEndOf="@+id/imgPokemonArt"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/mini_pokeball" />
 
-    <TextView
-        android:id="@+id/tvPokeNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="No. 001"
-        tools:layout_editor_absoluteX="225dp"
-        tools:layout_editor_absoluteY="101dp" />
+        <ImageView
+            android:id="@+id/imgSprite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+            app:layout_constraintEnd_toStartOf="@+id/tvPokeNumber"
+            app:layout_constraintStart_toEndOf="@id/imgDiscoveredStatus"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/sprite_example" />
 
-    <TableLayout
-        android:layout_width="283dp"
-        android:layout_height="609dp"
-        tools:layout_editor_absoluteX="127dp"
-        tools:layout_editor_absoluteY="121dp">
+        <TextView
+            android:id="@+id/tvPokeNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No. 001"
+            app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+            app:layout_constraintEnd_toStartOf="@+id/name_label"
+            app:layout_constraintStart_toEndOf="@id/imgSprite"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+        <TableLayout
+            android:id="@+id/tableLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/imgDiscoveredStatus"
+            app:layout_constraintTop_toBottomOf="@id/imgDiscoveredStatus"
+            app:layout_constraintEnd_toEndOf="parent">
 
-            <TextView
-                android:id="@+id/tvPokeType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/pokeentry_label_type"
-                tools:layout_editor_absoluteX="225dp"
-                tools:layout_editor_absoluteY="101dp" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-        </TableRow>
+                <TextView
+                    android:id="@+id/labelPokeType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pokeentry_label_type" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-        </TableRow>
+                <ImageView
+                    android:id="@+id/imgType1"
+                    android:layout_width="100dp"
+                    android:layout_height="20dp"
+                    app:srcCompat="@drawable/undiscovered_pokeball" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-        </TableRow>
-    </TableLayout>
+                <ImageView
+                    android:id="@+id/imgType2"
+                    android:layout_width="100dp"
+                    android:layout_height="20dp"
+                    app:srcCompat="@drawable/undiscovered_pokeball" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/labelPokeHeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pokeentry_label_height" />
+
+                <TextView
+                    android:id="@+id/tvPokeHeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00.0 ft" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/labelPokeWeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pokeentry_label_weight" />
+
+                <TextView
+                    android:id="@+id/tvPokeWeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="00.0 lbs" />
+
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/tvDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            app:layout_constraintStart_toStartOf="@id/tableLayout"
+            app:layout_constraintTop_toBottomOf="@id/imgPokemonArt" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
