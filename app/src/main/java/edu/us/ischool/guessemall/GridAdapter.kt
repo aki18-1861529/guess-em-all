@@ -9,11 +9,9 @@ import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import java.net.URL
 import java.util.concurrent.Executors
 import java.util.logging.Handler
@@ -28,14 +26,14 @@ class GridHolder(card: View) : RecyclerView.ViewHolder(card) {
     var sprite: ImageView? = null
 
     init {
-        cardBody = card.findViewById(R.id.card_body)
-        name = card.findViewById(R.id.name)
-        pokeball = card.findViewById(R.id.pokeball)
-        number = card.findViewById(R.id.number)
-        sprite = card.findViewById(R.id.sprite)
+        cardBody = card.findViewById(R.id.cardBody)
+        name = card.findViewById(R.id.tvName)
+        pokeball = card.findViewById(R.id.imgPokeball)
+        number = card.findViewById(R.id.tvNumber)
+        sprite = card.findViewById(R.id.imgSprite)
     }
 
-    fun bindModel(item: Pokemon) {
+    fun bindModel(item: Pokemon, activity: Activity) {
         // getting data values for topic
         name!!.text = item.name[0].uppercase() + item.name.substring(1)
         // get correct pokeball and sprite icon
@@ -44,38 +42,22 @@ class GridHolder(card: View) : RecyclerView.ViewHolder(card) {
             sprite?.setImageResource(R.drawable.undiscovered)
         } else {
             pokeball?.setImageResource(R.drawable.mini_pokeball)
-            fetchSprite(item.sprite, sprite!!)
+            // used third party library Glide to parse and display url images
+            Glide.with(activity).load(item.sprite).into(sprite!!)
         }
         number?.text = formatNumber(item.number.toString())
-        //sprite.setImageBitmap()
     }
 
     // format pokemon number string to be "No. XXX"
     fun formatNumber(num: String) : String {
         var result: String? = num
-        if (num.length === 1) {
+        if (num.length == 1) {
             result = "00${num}"
-        } else if (num.length === 2) {
+        } else if (num.length == 2) {
             result = "0${num}"
         }
 
         return "No. $result"
-    }
-
-    // get pokemon image from designated URL
-    fun fetchSprite(url: String, imgView: ImageView) {
-        val executor = Executors.newSingleThreadExecutor()
-        var image: Bitmap? = null
-        executor.execute {
-            try {
-                val `in` = URL(url).openStream()
-                image = BitmapFactory.decodeStream(`in`)
-                imgView.setImageBitmap(image)
-            }
-            catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
     }
 }
 
@@ -93,16 +75,22 @@ class GridAdapter(val activity: Activity) : RecyclerView.Adapter<GridHolder>() {
 
     override fun onBindViewHolder(holder: GridHolder, position: Int) {
         // asks row holder to bind this data into its UI
-        holder.bindModel(pokemon[position])
+        holder.bindModel(pokemon[position], activity)
 
         // setting listener
         holder.cardBody?.setOnClickListener{
-            val intent = Intent(activity, PokedexEntry::class.java)
+            if (pokemon[position].caught == 0) {
+                // lol can't get toast to work
+                Toast.makeText(it.context, "Pokemon not discovered!", Toast.LENGTH_SHORT).show()
+                Log.i("Data", "Not discovered")
+            } else {
+                val intent = Intent(activity, PokedexEntry::class.java)
 
-            // adding extras to intent
-            intent.putExtra("EXTRA_INDEX", position)
+                // adding extras to intent
+                intent.putExtra("EXTRA_INDEX", position)
 
-            activity.startActivity(intent)
+                activity.startActivity(intent)
+            }
         }
     }
 }

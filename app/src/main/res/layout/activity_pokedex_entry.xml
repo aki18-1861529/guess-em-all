@@ -18,7 +18,7 @@
         app:layout_constraintVertical_bias=".25" >
 
         <TextView
-            android:id="@+id/name_label"
+            android:id="@+id/tvName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -42,20 +42,20 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             app:layout_constraintBottom_toTopOf="@+id/tableLayout"
-            app:layout_constraintEnd_toStartOf="@+id/imgSprite"
+            app:layout_constraintEnd_toStartOf="@+id/tvPokeNumber"
             app:layout_constraintStart_toEndOf="@+id/imgPokemonArt"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/mini_pokeball" />
 
-        <ImageView
-            android:id="@+id/imgSprite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@+id/tableLayout"
-            app:layout_constraintEnd_toStartOf="@+id/tvPokeNumber"
-            app:layout_constraintStart_toEndOf="@id/imgDiscoveredStatus"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/sprite_example" />
+<!--        <ImageView-->
+<!--            android:id="@+id/imgSprite"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintBottom_toTopOf="@+id/tableLayout"-->
+<!--            app:layout_constraintEnd_toStartOf="@+id/tvPokeNumber"-->
+<!--            app:layout_constraintStart_toEndOf="@id/imgDiscoveredStatus"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:srcCompat="@drawable/sprite_example" />-->
 
         <TextView
             android:id="@+id/tvPokeNumber"
@@ -63,21 +63,23 @@
             android:layout_height="wrap_content"
             android:text="No. 001"
             app:layout_constraintBottom_toTopOf="@+id/tableLayout"
-            app:layout_constraintEnd_toStartOf="@+id/name_label"
-            app:layout_constraintStart_toEndOf="@id/imgSprite"
+            app:layout_constraintEnd_toStartOf="@+id/tvName"
+            app:layout_constraintStart_toEndOf="@id/imgDiscoveredStatus"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TableLayout
             android:id="@+id/tableLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="24dp"
             app:layout_constraintStart_toStartOf="@id/imgDiscoveredStatus"
             app:layout_constraintTop_toBottomOf="@id/imgDiscoveredStatus"
             app:layout_constraintEnd_toEndOf="parent">
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginBottom="4dp">
 
                 <TextView
                     android:id="@+id/labelPokeType"
@@ -88,25 +90,25 @@
                 <ImageView
                     android:id="@+id/imgType1"
                     android:layout_width="100dp"
-                    android:layout_height="20dp"
-                    app:srcCompat="@drawable/undiscovered_pokeball" />
+                    android:layout_height="20dp" />
 
                 <ImageView
                     android:id="@+id/imgType2"
                     android:layout_width="100dp"
-                    android:layout_height="20dp"
-                    app:srcCompat="@drawable/undiscovered_pokeball" />
+                    android:layout_height="20dp" />
 
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_marginBottom="4dp">
 
                 <TextView
                     android:id="@+id/labelPokeHeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingRight="8dp"
                     android:text="@string/pokeentry_label_height" />
 
                 <TextView
@@ -138,10 +140,11 @@
 
         <TextView
             android:id="@+id/tvDescription"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="Description"
             app:layout_constraintStart_toStartOf="@id/tableLayout"
+            app:layout_constraintEnd_toEndOf="@id/tableLayout"
             app:layout_constraintTop_toBottomOf="@id/imgPokemonArt" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
