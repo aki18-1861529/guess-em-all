@@ -12,9 +12,6 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import java.net.URL
-import java.util.concurrent.Executors
-import java.util.logging.Handler
 
 // importing data from another class
 
@@ -35,7 +32,7 @@ class GridHolder(card: View) : RecyclerView.ViewHolder(card) {
 
     fun bindModel(item: Pokemon, activity: Activity) {
         // getting data values for topic
-        name!!.text = item.name[0].uppercase() + item.name.substring(1)
+        name!!.text = item.name
         // get correct pokeball and sprite icon
         if (item.caught == 0) {
             pokeball?.setImageResource(R.drawable.undiscovered_pokeball)
@@ -87,7 +84,7 @@ class GridAdapter(val activity: Activity) : RecyclerView.Adapter<GridHolder>() {
                 val intent = Intent(activity, PokedexEntry::class.java)
 
                 // adding extras to intent
-                intent.putExtra("EXTRA_INDEX", position)
+                intent.putExtra("EXTRA_NAME", holder.name?.text)
 
                 Log.i("MainActivity", intent.extras.toString())
                 activity.startActivity(intent)

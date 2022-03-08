@@ -1,7 +1,6 @@
 package edu.us.ischool.guessemall
 
 import android.os.Environment
-import android.util.Log
 import org.json.JSONArray
 import java.io.BufferedReader
 import java.io.File
@@ -13,7 +12,8 @@ import kotlin.concurrent.thread
 
 // json data link https://gist.githubusercontent.com/corinzarkowski/e59261a8d5728a11793b4c38186a2924/raw/5af1cd35afc9e88b3804d7352b3c8216551ed387/pokemonlist.json
 class DataRepository {
-    private val pokeList: MutableList<Pokemon> = mutableListOf()
+    private var pokeMap: HashMap<String, Pokemon> = hashMapOf()
+    private var pokeList: MutableList<Pokemon> = mutableListOf()
 
     init {
         initData()
@@ -35,8 +35,10 @@ class DataRepository {
                 for (j in 0..(typeListObj.length() - 1)) {
                     typeList.add(typeListObj[j] as String)
                 }
-                pokeList.add(Pokemon(
-                    pokemonObj.getString("name"),
+
+                var name = pokemonObj.getString("name")[0].uppercase() + pokemonObj.getString("name").substring(1)
+                var pokemon: Pokemon = Pokemon(
+                    name,
                     pokemonObj.getInt("id"),
                     pokemonObj.getString("description").replace("\n"," "),
                     pokemonObj.getInt("height"),
@@ -44,7 +46,9 @@ class DataRepository {
                     pokemonObj.getString("sprite"),
                     typeList,
                     1
-                ))
+                )
+                pokeList.add(pokemon)
+                pokeMap[name] = pokemon
             }
         } else {
             downloadJSON()
@@ -74,8 +78,12 @@ class DataRepository {
         return pokeList
     }
 
-    fun getPokemon(index: Int) : Pokemon {
-        return pokeList[index]
+    fun getPokemon(name: String) : Pokemon? {
+        return pokeMap[name]
+    }
+
+    fun getAllNames() : Array<String> {
+        return pokeMap.keys.toTypedArray()
     }
 }
 
