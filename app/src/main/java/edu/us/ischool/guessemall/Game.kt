@@ -13,11 +13,10 @@ class Game : AppCompatActivity() {
         // fill in autocomplete options
         // Get a reference to the AutoCompleteTextView in the layout
         val textView = findViewById(R.id.tvAutoComplete_Pokemon) as AutoCompleteTextView
-        // Get the string array
-        // TODO: pass in array of all pokemon names from api? instead of hard-coding all of them into strings.xml
-        val pokemonNames: Array<out String> = resources.getStringArray(R.array.pokemon_array)
+        // Get the string array through DataRepository class
+        val data = DataRepository()
         // Create the adapter and set it to the AutoCompleteTextView
-        ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, pokemonNames).also { adapter ->
+        ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data.getAllNames()).also { adapter ->
             textView.setAdapter(adapter)
         }
 
