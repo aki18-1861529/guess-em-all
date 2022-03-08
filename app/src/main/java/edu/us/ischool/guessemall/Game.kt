@@ -4,7 +4,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
-import org.w3c.dom.Text
 
 class Game : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
