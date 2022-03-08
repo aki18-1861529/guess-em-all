@@ -33,7 +33,7 @@
             android:id="@+id/imgPokemonArt"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            app:layout_constraintEnd_toStartOf="@+id/imgDiscoveredStatus"
+            app:layout_constraintEnd_toStartOf="@+id/tableLayout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/tableLayout"
             app:srcCompat="@drawable/undiscovered" />
@@ -72,7 +72,7 @@
             android:id="@+id/tableLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="24dp"
+            android:layout_marginEnd="24dp"
             app:layout_constraintStart_toStartOf="@id/imgDiscoveredStatus"
             app:layout_constraintTop_toBottomOf="@id/imgDiscoveredStatus"
             app:layout_constraintEnd_toEndOf="parent">
@@ -80,37 +80,39 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="4dp">
+                android:layout_marginBottom="10dp" >
 
                 <TextView
                     android:id="@+id/labelPokeType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/pokeentry_label_type" />
+                    android:text="@string/pokeentry_label_type"
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:id="@+id/imgType1"
                     android:layout_width="100dp"
-                    android:layout_height="20dp" />
+                    android:layout_height="30dp" />
 
                 <ImageView
                     android:id="@+id/imgType2"
                     android:layout_width="100dp"
-                    android:layout_height="20dp" />
+                    android:layout_height="30dp" />
 
             </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="4dp">
+                android:layout_marginBottom="10dp">
 
                 <TextView
                     android:id="@+id/labelPokeHeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingRight="8dp"
-                    android:text="@string/pokeentry_label_height" />
+                    android:layout_marginEnd="25dp"
+                    android:text="@string/pokeentry_label_height"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvPokeHeight"
@@ -128,7 +130,8 @@
                     android:id="@+id/labelPokeWeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/pokeentry_label_weight" />
+                    android:text="@string/pokeentry_label_weight"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvPokeWeight"
