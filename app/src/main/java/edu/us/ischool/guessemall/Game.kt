@@ -3,12 +3,25 @@ package edu.us.ischool.guessemall
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
+import java.time.LocalDateTime
+import java.util.*
+import kotlin.random.Random
 
 class Game : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
+
+        // pick random pokemon
+        val pokemonList = App.data.getAllPokemon()
+        val pokemon = pokemonList[Random.nextInt(0, 150)]
+        Log.i("TESTING", pokemon.toString())
+
+        val dateSeed = LocalDateTime.now().dayOfYear + LocalDateTime.now().year
+        val dailyPokemon = pokemonList[Random(dateSeed).nextInt(0, 150)]
+        Log.i("TESTING", dailyPokemon.toString())
 
         // fill in autocomplete options
         // Get a reference to the AutoCompleteTextView in the layout

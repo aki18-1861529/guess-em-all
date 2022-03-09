@@ -1,6 +1,7 @@
 package edu.us.ischool.guessemall
 
 import android.os.Environment
+import android.util.Log
 import org.json.JSONArray
 import java.io.BufferedReader
 import java.io.File
@@ -45,7 +46,7 @@ class DataRepository {
                     pokemonObj.getInt("weight"),
                     pokemonObj.getString("sprite"),
                     typeList,
-                    1
+                    pokemonObj.getInt("caught")
                 )
                 pokeList.add(pokemon)
                 pokeMap[name] = pokemon
