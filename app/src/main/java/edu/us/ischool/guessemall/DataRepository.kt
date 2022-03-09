@@ -37,8 +37,9 @@ class DataRepository {
                     typeList.add(typeListObj[j] as String)
                 }
 
+
                 var name = pokemonObj.getString("name")[0].uppercase() + pokemonObj.getString("name").substring(1)
-                var pokemon: Pokemon = Pokemon(
+                var pokemon : Pokemon = Pokemon(
                     name,
                     pokemonObj.getInt("id"),
                     pokemonObj.getString("description").replace("\n"," "),
@@ -48,6 +49,7 @@ class DataRepository {
                     typeList,
                     pokemonObj.getInt("caught")
                 )
+
                 pokeList.add(pokemon)
                 pokeMap[name] = pokemon
             }
