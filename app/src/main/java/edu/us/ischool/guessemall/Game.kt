@@ -67,6 +67,15 @@ class Game : AppCompatActivity() {
             findViewById<TextView>(R.id.tvCurrentGuessLabel).text ="Evolution"
         }
 
+        //Guess a Pokemon Attribute
+        findViewById<Button>(R.id.btnGuessPart).setOnClickListener {
+            val partBtn = findViewById<Button>(R.id.btnGuessPart)
+            val spinnerAnswer = findViewById<Spinner>(R.id.spinner).getSelectedItem().toString()
+            if (partBtn.text == "Guess Type 1" && spinnerAnswer == dailyPokemon.types[0].replaceFirstChar { it.titlecase() }) {
+                Toast.makeText(this, "Correct Type", Toast.LENGTH_SHORT).show()
+            }
+        }
+
         // Show results page with pokemon stats
         findViewById<Button>(R.id.btnGuessPokemon).setOnClickListener {
             val intent = Intent(this,
