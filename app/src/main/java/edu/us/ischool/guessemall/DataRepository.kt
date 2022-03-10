@@ -47,7 +47,8 @@ class DataRepository {
                     pokemonObj.getInt("weight"),
                     pokemonObj.getString("sprite"),
                     typeList,
-                    pokemonObj.getInt("caught")
+                    pokemonObj.getInt("caught"),
+                    pokemonObj.getInt("evolutioncount")
                 )
 
                 pokeList.add(pokemon)
@@ -61,7 +62,7 @@ class DataRepository {
     // download data from JSON file
     private fun downloadJSON() {
         val t = thread {
-            val server = URL("https://gist.githubusercontent.com/corinzarkowski/e59261a8d5728a11793b4c38186a2924/raw/5af1cd35afc9e88b3804d7352b3c8216551ed387/pokemonlist.json")
+            val server = URL("https://gist.githubusercontent.com/corinzarkowski/e59261a8d5728a11793b4c38186a2924/raw/8ee43e439eb0b0f732d6d30b5a9572470b0852fd/pokemonlist.json")
             val client: HttpURLConnection = server.openConnection() as HttpURLConnection
             client.requestMethod = "GET"
             val filePath = File(Environment.getExternalStorageDirectory().path, "pokemon.json")
@@ -93,4 +94,4 @@ class DataRepository {
 // added an extra image field since my app has an image for each topic
 data class Pokemon(
     val name: String, val number: Int, var desc: String, var height: Int, var weight: Int,
-    var sprite: String, var types: List<String>, val caught: Int) : Serializable
+    var sprite: String, var types: List<String>, val caught: Int, var evos: Int) : Serializable

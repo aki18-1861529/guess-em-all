@@ -25,8 +25,8 @@
     <string name="placeholder">----</string>
     <string name="game_statistics">Game Statistics</string>
     <string-array name="generations_array">
-        <item>Gen I: Red/Green</item>
-        <item>Gen II: Gold/Silver</item>
+        <item>Gen I: Red/Blue/Yellow</item>
+        <item>Gen II: Gold/Silver/Crystal</item>
         <item>Gen III: Ruby/Sapphire/Emerald</item>
         <item>Gen IV: Diamond/Pearl/Platinum</item>
         <item>Gen V: Black/White</item>

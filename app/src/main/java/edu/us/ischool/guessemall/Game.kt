@@ -74,7 +74,17 @@ class Game : AppCompatActivity() {
             val partBtn = findViewById<Button>(R.id.btnGuessPart)
             val spinnerAnswer = findViewById<Spinner>(R.id.spinner).getSelectedItem().toString()
             if (partBtn.text == "Guess Type 1" && spinnerAnswer == dailyPokemon.types[0].replaceFirstChar { it.titlecase() }) {
-                Toast.makeText(this, "Correct Type", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Correct Type 1", Toast.LENGTH_SHORT).show()
+            } else if (partBtn.text == "Guess Type 2" && spinnerAnswer == "None" && dailyPokemon.types.size == 1) {
+                Toast.makeText(this, "Correct Type 2 (Single Typing)", Toast.LENGTH_SHORT).show()
+            } else if (partBtn.text == "Guess Type 2" && spinnerAnswer == dailyPokemon.types[1].replaceFirstChar { it.titlecase() }) {
+                Toast.makeText(this, "Correct Type 2", Toast.LENGTH_SHORT).show()
+            } else if (partBtn.text == "Guess Evolution" && spinnerAnswer.last().toString() == dailyPokemon.evos.toString()) {
+                Toast.makeText(this, "Correct Number of Evolutions", Toast.LENGTH_SHORT).show()
+            } else if (partBtn.text == "Guess Generation" && spinnerAnswer == "Gen I: Red/Blue/Yellow") {
+                Toast.makeText(this, "Correct Generation", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Incorrect Guess, Try Again", Toast.LENGTH_SHORT).show()
             }
         }
 
