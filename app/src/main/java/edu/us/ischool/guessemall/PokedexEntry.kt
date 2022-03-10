@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
 
 class PokedexEntry : AppCompatActivity() {
@@ -13,8 +14,9 @@ class PokedexEntry : AppCompatActivity() {
 
         // getting intent from last activity and pokemon data
         val pIntent = this.intent
-        val pokemon: Pokemon? = pIntent.extras?.getString("EXTRA_NAME")
+        val pokemon: Pokemon? = pIntent.extras?.getString("pokemon")
             ?.let { App.data.getPokemon(it) }
+        val timeVal = pIntent.extras?.getString("time")
 
         // grabbing pokedex entry views
         val sprite: ImageView = findViewById(R.id.imgPokemonArt)
@@ -24,6 +26,7 @@ class PokedexEntry : AppCompatActivity() {
         val weight: TextView = findViewById(R.id.tvPokeWeight)
         val desc: TextView = findViewById(R.id.tvDescription)
         val type1: ImageView = findViewById(R.id.imgType1)
+        val time: TextView = findViewById(R.id.time)
 
         // setting view content
         // used third party library Glide to parse and display url images
@@ -33,6 +36,8 @@ class PokedexEntry : AppCompatActivity() {
         height.text = "${pokemon.height.toDouble() / 10} m"
         weight.text = "${pokemon.weight.toDouble() / 10} kg"
         desc.text = pokemon.desc
+        time.text = time.text.toString() + " " + timeVal
+        time.isVisible = true
 
         // adding the type images and handling multiple types
         type1.setImageResource(getResources().getIdentifier(pokemon.types[0], "drawable", getPackageName()));
