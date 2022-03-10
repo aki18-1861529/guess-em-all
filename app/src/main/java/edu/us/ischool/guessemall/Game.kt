@@ -3,6 +3,7 @@ package edu.us.ischool.guessemall
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.util.Log
 import android.widget.*
 import java.time.LocalDateTime
@@ -13,6 +14,7 @@ class Game : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
+        val tStart = System.currentTimeMillis()
 
         // pick random pokemon
         val pokemonList = App.data.getAllPokemon()
@@ -69,8 +71,13 @@ class Game : AppCompatActivity() {
 
         // Show results page with pokemon stats
         findViewById<Button>(R.id.btnGuessPokemon).setOnClickListener {
-            val intent = Intent(this,
-                PokedexEntry::class.java)
+            // calculate elapsed time in seconds
+            val tEnd = System.currentTimeMillis()
+            val tDelta = tEnd - tStart
+            val elapsedSeconds = tDelta / 1000.0
+            val intent = Intent(this, PokedexEntry::class.java)
+            intent.putExtra("pokemon", textView.text.toString())
+            intent.putExtra("time", DateUtils.formatElapsedTime(elapsedSeconds.toLong()))
             startActivity(intent)
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
