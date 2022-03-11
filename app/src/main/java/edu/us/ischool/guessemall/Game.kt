@@ -69,6 +69,8 @@ class Game : AppCompatActivity() {
             findViewById<TextView>(R.id.tvCurrentGuessLabel).text ="Evolution"
         }
 
+        Log.i("Guess-Em-All", dailyPokemon.name.replaceFirstChar { it.titlecase() })
+
         //Guess a Pokemon Attribute
         findViewById<Button>(R.id.btnGuessPart).setOnClickListener {
             val partBtn = findViewById<Button>(R.id.btnGuessPart)
