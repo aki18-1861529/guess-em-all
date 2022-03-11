@@ -5,10 +5,13 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.telephony.SmsManager
 import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import java.io.File
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
@@ -35,6 +38,24 @@ class MainActivity : AppCompatActivity() {
             ),
             1
         )
+
+        // macgyver fix for crash due to missing pokelist
+        findViewById<Button>(R.id.btnStartGame).isEnabled = false
+        findViewById<Button>(R.id.btnPokedex).isEnabled = false
+        Toast.makeText(applicationContext, "Loading...", Toast.LENGTH_SHORT).show()
+        val messageTimer = Timer()
+        messageTimer.schedule(object : TimerTask() {
+            override fun run() {
+                if (App.data.isInitialized) {
+                    this@MainActivity.runOnUiThread(java.lang.Runnable {
+                        findViewById<Button>(R.id.btnStartGame).isEnabled = true
+                        findViewById<Button>(R.id.btnPokedex).isEnabled = true
+                        Toast.makeText(applicationContext, "Finished loading", Toast.LENGTH_SHORT).show()
+                    })
+                    this.cancel()
+                }
+            }
+        }, 0, 250)
 
         // update list of caught pokemon on boot
         val sharedPreference = getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)

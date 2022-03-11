@@ -16,6 +16,7 @@ import kotlin.concurrent.thread
 class DataRepository {
     private var pokeMap: HashMap<String, Pokemon> = hashMapOf()
     private var pokeList: MutableList<Pokemon> = mutableListOf()
+    var isInitialized: Boolean = false
 
     init {
         initData()
@@ -55,6 +56,7 @@ class DataRepository {
                 pokeList.add(pokemon)
                 pokeMap[name] = pokemon
             }
+            isInitialized = true
         } else {
             downloadJSON()
         }
@@ -76,6 +78,7 @@ class DataRepository {
             }
             result.close()
             output.close()
+            initData()
         }
     }
 
@@ -96,8 +99,10 @@ class DataRepository {
     }
 
     fun refreshCaught(caughtSet : MutableSet<String>) {
-        caughtSet.forEach {
-            pokeList[it.toInt() - 1].caught = 1
+        if (isInitialized) {
+            caughtSet.forEach {
+                pokeList[it.toInt() - 1].caught = 1
+            }
         }
     }
 }
