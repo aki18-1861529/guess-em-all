@@ -19,14 +19,18 @@ class Game : AppCompatActivity() {
 
         val tStart = System.currentTimeMillis()
 
-        // pick random pokemon
         val pokemonList = App.data.getAllPokemon()
-        val pokemon = pokemonList[Random.nextInt(0, 150)]
-        Log.i("TESTING", pokemon.toString())
-
-        val dateSeed = LocalDateTime.now().dayOfYear + LocalDateTime.now().year
-        val dailyPokemon = pokemonList[Random(dateSeed).nextInt(0, 150)]
-        Log.i("TESTING", dailyPokemon.toString())
+        val mode : String = intent.getStringExtra("mode").toString()
+        var pokemon : Pokemon
+        if (mode == "daily") {
+            val dateSeed = LocalDateTime.now().dayOfYear + LocalDateTime.now().year
+            pokemon = pokemonList[Random(dateSeed).nextInt(0, 150)]
+            Log.i("TESTING", pokemon.toString())
+        } else {
+            // pick random pokemon
+            pokemon = pokemonList[Random.nextInt(0, 150)]
+            Log.i("TESTING", pokemon.toString())
+        }
 
         // fill in autocomplete options
         // Get a reference to the AutoCompleteTextView in the layout
@@ -72,19 +76,19 @@ class Game : AppCompatActivity() {
             findViewById<TextView>(R.id.tvCurrentGuessLabel).text ="Evolution"
         }
 
-        Log.i("Guess-Em-All", dailyPokemon.name.replaceFirstChar { it.titlecase() })
+        Log.i("Guess-Em-All", pokemon.name.replaceFirstChar { it.titlecase() })
 
         //Guess a Pokemon Attribute
         findViewById<Button>(R.id.btnGuessPart).setOnClickListener {
             val partBtn = findViewById<Button>(R.id.btnGuessPart)
             val spinnerAnswer = findViewById<Spinner>(R.id.spinner).getSelectedItem().toString()
-            if (partBtn.text == "Guess Type 1" && spinnerAnswer == dailyPokemon.types[0].replaceFirstChar { it.titlecase() }) {
+            if (partBtn.text == "Guess Type 1" && spinnerAnswer == pokemon.types[0].replaceFirstChar { it.titlecase() }) {
                 Toast.makeText(this, "Correct Type 1", Toast.LENGTH_SHORT).show()
-            } else if (partBtn.text == "Guess Type 2" && spinnerAnswer == "None" && dailyPokemon.types.size == 1) {
+            } else if (partBtn.text == "Guess Type 2" && spinnerAnswer == "None" && pokemon.types.size == 1) {
                 Toast.makeText(this, "Correct Type 2 (Single Typing)", Toast.LENGTH_SHORT).show()
-            } else if (partBtn.text == "Guess Type 2" && spinnerAnswer == dailyPokemon.types[1].replaceFirstChar { it.titlecase() }) {
+            } else if (partBtn.text == "Guess Type 2" && spinnerAnswer == pokemon.types[1].replaceFirstChar { it.titlecase() }) {
                 Toast.makeText(this, "Correct Type 2", Toast.LENGTH_SHORT).show()
-            } else if (partBtn.text == "Guess Evolution" && spinnerAnswer.last().toString() == dailyPokemon.evos.toString()) {
+            } else if (partBtn.text == "Guess Evolution" && spinnerAnswer.last().toString() == pokemon.evos.toString()) {
                 Toast.makeText(this, "Correct Number of Evolutions", Toast.LENGTH_SHORT).show()
             } else if (partBtn.text == "Guess Generation" && spinnerAnswer == "Gen I: Red/Blue/Yellow") {
                 Toast.makeText(this, "Correct Generation", Toast.LENGTH_SHORT).show()
@@ -96,7 +100,7 @@ class Game : AppCompatActivity() {
         // Show results page with pokemon stats
         findViewById<Button>(R.id.btnGuessPokemon).setOnClickListener {
             // check if the guessed pokemon is correct
-            if (dailyPokemon.name.replaceFirstChar { it.titlecase() } == textView.text.toString()) {
+            if (pokemon.name.replaceFirstChar { it.titlecase() } == textView.text.toString()) {
                 // calculate elapsed time in seconds
                 val tEnd = System.currentTimeMillis()
                 val tDelta = tEnd - tStart
@@ -147,9 +151,9 @@ class Game : AppCompatActivity() {
                 // update caught pokemon
                 var caughtSet = sharedPreference.getStringSet("caughtSet", mutableSetOf<String>())
                 if (caughtSet != null) {
-                    if (!caughtSet.contains(dailyPokemon.number.toString())) {
-                        caughtSet.add(dailyPokemon.number.toString())
-                        App.data.addAsCaught(dailyPokemon.number)
+                    if (!caughtSet.contains(pokemon.number.toString())) {
+                        caughtSet.add(pokemon.number.toString())
+                        App.data.addAsCaught(pokemon.number)
                         editor.putStringSet("caught", caughtSet)
                     }
                 }

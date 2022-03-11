@@ -39,30 +39,34 @@ class MainActivity : AppCompatActivity() {
             1
         )
 
-        // macgyver fix for crash due to missing pokelist
+        // wait for data initialization to prevent crash
         findViewById<Button>(R.id.btnStartGame).isEnabled = false
         findViewById<Button>(R.id.btnPokedex).isEnabled = false
+        findViewById<Button>(R.id.btnDaily).isEnabled = false
         Toast.makeText(applicationContext, "Loading...", Toast.LENGTH_SHORT).show()
         val messageTimer = Timer()
         messageTimer.schedule(object : TimerTask() {
             override fun run() {
                 if (App.data.isInitialized) {
+                    // enable buttons
                     this@MainActivity.runOnUiThread(java.lang.Runnable {
                         findViewById<Button>(R.id.btnStartGame).isEnabled = true
                         findViewById<Button>(R.id.btnPokedex).isEnabled = true
+                        findViewById<Button>(R.id.btnDaily).isEnabled = true
                         Toast.makeText(applicationContext, "Finished loading", Toast.LENGTH_SHORT).show()
                     })
+                    // update list of caught pokemon
+                    val sharedPreference = getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
+                    var caughtSet = sharedPreference.getStringSet("caught", mutableSetOf<String>())
+                    if (caughtSet != null) {
+                        App.data.refreshCaught(caughtSet)
+                    }
                     this.cancel()
                 }
             }
         }, 0, 250)
 
-        // update list of caught pokemon on boot
-        val sharedPreference = getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
-        var caughtSet = sharedPreference.getStringSet("caught", mutableSetOf<String>())
-        if (caughtSet != null) {
-            App.data.refreshCaught(caughtSet)
-        }
+
 
         // start Game activity on Start Game button tap
         findViewById<Button>(R.id.btnStartGame).setOnClickListener {
@@ -71,9 +75,18 @@ class MainActivity : AppCompatActivity() {
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
 
+        // start Game activity on Start Daily button tap w/ daily param
+        findViewById<Button>(R.id.btnDaily).setOnClickListener {
+            val intent = Intent(this, Game::class.java)
+            intent.putExtra("mode", "daily");
+            startActivity(intent)
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        }
+
         // Start Pokedex activity on click of Pokedex button
         findViewById<Button>(R.id.btnPokedex).setOnClickListener {
             val intent = Intent(this, Pokedex::class.java)
+            intent.putExtra("mode", "random");
             startActivity(intent)
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }

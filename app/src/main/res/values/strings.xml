@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Guess \'Em All</string>
     <string name="btn_start_txt">Start a New Game</string>
+    <string name="btn_daily_txt">Play the Daily</string>
     <string name="btn_pokedex_txt">Pokédex</string>
     <string name="btn_stats_txt">Game Statistics</string>
     <string name="game_et_pokemon_hint">Pokémon Name</string>

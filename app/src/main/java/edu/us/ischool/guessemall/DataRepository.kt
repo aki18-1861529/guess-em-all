@@ -99,10 +99,8 @@ class DataRepository {
     }
 
     fun refreshCaught(caughtSet : MutableSet<String>) {
-        if (isInitialized) {
-            caughtSet.forEach {
-                pokeList[it.toInt() - 1].caught = 1
-            }
+        caughtSet.forEach {
+            pokeList[it.toInt() - 1].caught = 1
         }
     }
 }
