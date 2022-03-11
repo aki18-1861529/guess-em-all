@@ -90,15 +90,21 @@ class Game : AppCompatActivity() {
 
         // Show results page with pokemon stats
         findViewById<Button>(R.id.btnGuessPokemon).setOnClickListener {
-            // calculate elapsed time in seconds
-            val tEnd = System.currentTimeMillis()
-            val tDelta = tEnd - tStart
-            val elapsedSeconds = tDelta / 1000.0
-            val intent = Intent(this, PokedexEntry::class.java)
-            intent.putExtra("pokemon", textView.text.toString())
-            intent.putExtra("time", DateUtils.formatElapsedTime(elapsedSeconds.toLong()))
-            startActivity(intent)
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            // check if the guessed pokemon is correct
+            if (dailyPokemon.name.replaceFirstChar { it.titlecase() } == textView.text.toString()) {
+                // calculate elapsed time in seconds
+                val tEnd = System.currentTimeMillis()
+                val tDelta = tEnd - tStart
+                val elapsedSeconds = tDelta / 1000.0
+                dailyPokemon.caught = 1
+                val intent = Intent(this, PokedexEntry::class.java)
+                intent.putExtra("pokemon", textView.text.toString())
+                intent.putExtra("time", DateUtils.formatElapsedTime(elapsedSeconds.toLong()))
+                startActivity(intent)
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            } else {
+                Toast.makeText(this, "Incorrect Guess, Try Again", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
