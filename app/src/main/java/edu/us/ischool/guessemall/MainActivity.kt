@@ -36,6 +36,13 @@ class MainActivity : AppCompatActivity() {
             1
         )
 
+        // update list of caught pokemon on boot
+        val sharedPreference = getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
+        var caughtSet = sharedPreference.getStringSet("caught", mutableSetOf<String>())
+        if (caughtSet != null) {
+            App.data.refreshCaught(caughtSet)
+        }
+
         // start Game activity on Start Game button tap
         findViewById<Button>(R.id.btnStartGame).setOnClickListener {
             val intent = Intent(this, Game::class.java)

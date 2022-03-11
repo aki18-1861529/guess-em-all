@@ -3,9 +3,11 @@ package edu.us.ischool.guessemall
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Environment
 import android.text.format.DateUtils
 import android.util.Log
 import android.widget.*
+import java.io.File
 import java.time.LocalDateTime
 import java.util.*
 import kotlin.random.Random
@@ -14,6 +16,7 @@ class Game : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
+
         val tStart = System.currentTimeMillis()
 
         // pick random pokemon
@@ -139,9 +142,18 @@ class Game : AppCompatActivity() {
                     editor.putLong("slowestTime", elapsedSeconds.toLong())
                 }
 
+                // update caught pokemon
+                var caughtSet = sharedPreference.getStringSet("caughtSet", mutableSetOf<String>())
+                if (caughtSet != null) {
+                    if (!caughtSet.contains(dailyPokemon.number.toString())) {
+                        caughtSet.add(dailyPokemon.number.toString())
+                        App.data.addAsCaught(dailyPokemon.number)
+                        editor.putStringSet("caught", caughtSet)
+                    }
+                }
+
                 editor.commit()
 
-                dailyPokemon.caught = 1
                 val intent = Intent(this, PokedexEntry::class.java)
                 intent.putExtra("pokemon", textView.text.toString())
                 intent.putExtra("time", DateUtils.formatElapsedTime(elapsedSeconds.toLong()))

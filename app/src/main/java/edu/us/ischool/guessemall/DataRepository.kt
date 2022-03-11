@@ -1,5 +1,6 @@
 package edu.us.ischool.guessemall
 
+import android.content.SharedPreferences
 import android.os.Environment
 import android.util.Log
 import org.json.JSONArray
@@ -88,6 +89,16 @@ class DataRepository {
 
     fun getAllNames() : Array<String> {
         return pokeMap.keys.toTypedArray()
+    }
+
+    fun addAsCaught(id : Int) {
+        pokeList[id - 1].caught = 1
+    }
+
+    fun refreshCaught(caughtSet : MutableSet<String>) {
+        caughtSet.forEach {
+            pokeList[it.toInt() - 1].caught = 1
+        }
     }
 }
 

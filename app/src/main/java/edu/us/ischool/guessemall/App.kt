@@ -6,7 +6,7 @@ import android.util.Log
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-        Log.i("QuizApp", "QuizApp is loaded and running!")
+        Log.i("GuessEmAll", "GuessEmAll is loaded and running!")
     }
 
 
