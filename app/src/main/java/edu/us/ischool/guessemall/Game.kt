@@ -90,59 +90,66 @@ class Game : AppCompatActivity() {
 
         // Show results page with pokemon stats
         findViewById<Button>(R.id.btnGuessPokemon).setOnClickListener {
-            // calculate elapsed time in seconds
-            val tEnd = System.currentTimeMillis()
-            val tDelta = tEnd - tStart
-            val elapsedSeconds = tDelta / 1000.0
+            // check if the guessed pokemon is correct
+            if (dailyPokemon.name.replaceFirstChar { it.titlecase() } == textView.text.toString()) {
+                // calculate elapsed time in seconds
+                val tEnd = System.currentTimeMillis()
+                val tDelta = tEnd - tStart
+                val elapsedSeconds = tDelta / 1000.0
 
-            val sharedPreference = getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
-            var editor = sharedPreference.edit()
+                val sharedPreference = getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
+                var editor = sharedPreference.edit()
 
-            // increment total games and time
-            var total : Int = 1
-            var totalTime : Long = elapsedSeconds.toLong()
-            if (sharedPreference.getInt("totalGames", 0) != 0) {
-                total = sharedPreference.getInt("totalGames", 0).inc()
-            }
-            if (sharedPreference.getLong("totalTime", 0) != 0L) {
-                totalTime = sharedPreference.getLong("totalTime", 0) + elapsedSeconds.toLong()
-            }
-            editor.putInt("totalGames", total)
-            editor.putLong("totalTime", totalTime)
+                // increment total games and time
+                var total: Int = 1
+                var totalTime: Long = elapsedSeconds.toLong()
+                if (sharedPreference.getInt("totalGames", 0) != 0) {
+                    total = sharedPreference.getInt("totalGames", 0).inc()
+                }
+                if (sharedPreference.getLong("totalTime", 0) != 0L) {
+                    totalTime = sharedPreference.getLong("totalTime", 0) + elapsedSeconds.toLong()
+                }
+                editor.putInt("totalGames", total)
+                editor.putLong("totalTime", totalTime)
 
-            // calculate average time
-            if (total > 1L) {
-                editor.putLong("avgTime", totalTime.div(total))
-            } else {
-                editor.putLong("avgTime", totalTime)
-            }
+                // calculate average time
+                if (total > 1L) {
+                    editor.putLong("avgTime", totalTime.div(total))
+                } else {
+                    editor.putLong("avgTime", totalTime)
+                }
 
-            // update best time
-            if (sharedPreference.getLong("bestTime", 0) != 0L) {
-                var currBestTime = sharedPreference.getLong("bestTime", 0)
-                if (elapsedSeconds < currBestTime) {
+                // update best time
+                if (sharedPreference.getLong("bestTime", 0) != 0L) {
+                    var currBestTime = sharedPreference.getLong("bestTime", 0)
+                    if (elapsedSeconds < currBestTime) {
+                        editor.putLong("bestTime", elapsedSeconds.toLong())
+                    }
+                } else {
                     editor.putLong("bestTime", elapsedSeconds.toLong())
                 }
-            } else {
-                editor.putLong("bestTime", elapsedSeconds.toLong())
-            }
 
-            // update slowest time
-            if (sharedPreference.getLong("slowestTime", 0) != 0L) {
-                var currSlowestTime = sharedPreference.getLong("slowestTime", 0)
-                if (elapsedSeconds > currSlowestTime) {
+                // update slowest time
+                if (sharedPreference.getLong("slowestTime", 0) != 0L) {
+                    var currSlowestTime = sharedPreference.getLong("slowestTime", 0)
+                    if (elapsedSeconds > currSlowestTime) {
+                        editor.putLong("slowestTime", elapsedSeconds.toLong())
+                    }
+                } else {
                     editor.putLong("slowestTime", elapsedSeconds.toLong())
                 }
-            } else {
-                editor.putLong("slowestTime", elapsedSeconds.toLong())
-            }
 
-            editor.commit()
-            val intent = Intent(this, PokedexEntry::class.java)
-            intent.putExtra("pokemon", textView.text.toString())
-            intent.putExtra("time", DateUtils.formatElapsedTime(elapsedSeconds.toLong()))
-            startActivity(intent)
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+                editor.commit()
+
+                dailyPokemon.caught = 1
+                val intent = Intent(this, PokedexEntry::class.java)
+                intent.putExtra("pokemon", textView.text.toString())
+                intent.putExtra("time", DateUtils.formatElapsedTime(elapsedSeconds.toLong()))
+                startActivity(intent)
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+            } else {
+                Toast.makeText(this, "Incorrect Guess, Try Again", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

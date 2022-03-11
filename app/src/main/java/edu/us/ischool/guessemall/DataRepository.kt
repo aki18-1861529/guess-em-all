@@ -94,4 +94,4 @@ class DataRepository {
 // added an extra image field since my app has an image for each topic
 data class Pokemon(
     val name: String, val number: Int, var desc: String, var height: Int, var weight: Int,
-    var sprite: String, var types: List<String>, val caught: Int, var evos: Int) : Serializable
+    var sprite: String, var types: List<String>, var caught: Int, var evos: Int) : Serializable
