@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         when (requestCode) {
             1 -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    Log.i("TODO", "do something here maybe")
+                    // do something here maybe
                 }
             }
         }
