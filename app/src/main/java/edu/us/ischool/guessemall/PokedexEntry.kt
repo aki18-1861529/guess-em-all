@@ -2,6 +2,7 @@ package edu.us.ischool.guessemall
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
@@ -14,9 +15,11 @@ class PokedexEntry : AppCompatActivity() {
 
         // getting intent from last activity and pokemon data
         val pIntent = this.intent
-        val pokemon: Pokemon? = pIntent.extras?.getString("pokemon")
+        val pokemon: Pokemon? = pIntent.extras?.getString("EXTRA_NAME")
             ?.let { App.data.getPokemon(it) }
         val timeVal = pIntent.extras?.getString("time")
+
+        Log.i("TESTING", pokemon.toString())
 
         // grabbing pokedex entry views
         val sprite: ImageView = findViewById(R.id.imgPokemonArt)

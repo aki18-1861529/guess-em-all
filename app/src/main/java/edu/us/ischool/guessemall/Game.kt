@@ -20,9 +20,10 @@ class Game : AppCompatActivity() {
         val tStart = System.currentTimeMillis()
 
         val pokemonList = App.data.getAllPokemon()
-        val mode : String = intent.getStringExtra("mode").toString()
+        val mode : String = intent.getStringExtra("MODE").toString()
         var pokemon : Pokemon
         if (mode == "daily") {
+            // pick daily
             val dateSeed = LocalDateTime.now().dayOfYear + LocalDateTime.now().year
             pokemon = pokemonList[Random(dateSeed).nextInt(0, 150)]
             Log.i("TESTING", pokemon.toString())

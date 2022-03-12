@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         // start Game activity on Start Daily button tap w/ daily param
         findViewById<Button>(R.id.btnDaily).setOnClickListener {
             val intent = Intent(this, Game::class.java)
-            intent.putExtra("mode", "daily");
+            intent.putExtra("MODE", "daily");
             startActivity(intent)
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity() {
         // Start Pokedex activity on click of Pokedex button
         findViewById<Button>(R.id.btnPokedex).setOnClickListener {
             val intent = Intent(this, Pokedex::class.java)
-            intent.putExtra("mode", "random");
+            intent.putExtra("MODE", "random");
             startActivity(intent)
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
