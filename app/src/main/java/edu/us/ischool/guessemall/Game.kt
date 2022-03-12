@@ -87,6 +87,8 @@ class Game : AppCompatActivity() {
                 Toast.makeText(this, "Correct Type 1", Toast.LENGTH_SHORT).show()
             } else if (partBtn.text == "Guess Type 2" && spinnerAnswer == "None" && pokemon.types.size == 1) {
                 Toast.makeText(this, "Correct Type 2 (Single Typing)", Toast.LENGTH_SHORT).show()
+            } else if (partBtn.text == "Guess Type 2" && spinnerAnswer != "None" && pokemon.types.size == 1) {
+                Toast.makeText(this, "Incorrect Guess, Try Again", Toast.LENGTH_SHORT).show()
             } else if (partBtn.text == "Guess Type 2" && spinnerAnswer == pokemon.types[1].replaceFirstChar { it.titlecase() }) {
                 Toast.makeText(this, "Correct Type 2", Toast.LENGTH_SHORT).show()
             } else if (partBtn.text == "Guess Evolution" && spinnerAnswer.last().toString() == pokemon.evos.toString()) {
