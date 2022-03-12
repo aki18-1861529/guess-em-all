@@ -85,16 +85,24 @@ class Game : AppCompatActivity() {
             val spinnerAnswer = findViewById<Spinner>(R.id.spinner).getSelectedItem().toString()
             if (partBtn.text == "Guess Type 1" && spinnerAnswer == pokemon.types[0].replaceFirstChar { it.titlecase() }) {
                 Toast.makeText(this, "Correct Type 1", Toast.LENGTH_SHORT).show()
+                val newImg = "correct_type_" + pokemon.types[0]
+                findViewById<ImageView>(R.id.imgGuessType1).setImageResource(resources.getIdentifier(newImg, "drawable", this.packageName))
             } else if (partBtn.text == "Guess Type 2" && spinnerAnswer == "None" && pokemon.types.size == 1) {
                 Toast.makeText(this, "Correct Type 2 (Single Typing)", Toast.LENGTH_SHORT).show()
+                findViewById<ImageView>(R.id.imgGuessType2).setImageResource(R.drawable.correct_type_typeless)
             } else if (partBtn.text == "Guess Type 2" && spinnerAnswer != "None" && pokemon.types.size == 1) {
                 Toast.makeText(this, "Incorrect Guess, Try Again", Toast.LENGTH_SHORT).show()
             } else if (partBtn.text == "Guess Type 2" && spinnerAnswer == pokemon.types[1].replaceFirstChar { it.titlecase() }) {
                 Toast.makeText(this, "Correct Type 2", Toast.LENGTH_SHORT).show()
+                val newImg = "correct_type_" + pokemon.types[1]
+                findViewById<ImageView>(R.id.imgGuessType2).setImageResource(resources.getIdentifier(newImg, "drawable", this.packageName))
             } else if (partBtn.text == "Guess Evolution" && spinnerAnswer.last().toString() == pokemon.evos.toString()) {
                 Toast.makeText(this, "Correct Number of Evolutions", Toast.LENGTH_SHORT).show()
+                val newImg = "correct_evo_" + pokemon.evos.toString()
+                findViewById<ImageView>(R.id.imgGuessEvo).setImageResource(resources.getIdentifier(newImg, "drawable", this.packageName))
             } else if (partBtn.text == "Guess Generation" && spinnerAnswer == "Gen I: Red/Blue/Yellow") {
                 Toast.makeText(this, "Correct Generation", Toast.LENGTH_SHORT).show()
+                findViewById<ImageView>(R.id.imgGuessGen).setImageResource(R.drawable.correct_gen_i)
             } else {
                 Toast.makeText(this, "Incorrect Guess, Try Again", Toast.LENGTH_SHORT).show()
             }
