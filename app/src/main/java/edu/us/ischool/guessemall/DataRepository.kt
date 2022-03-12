@@ -19,6 +19,7 @@ class DataRepository {
     var isInitialized: Boolean = false
 
     init {
+        downloadJSON()
         initData()
     }
 
@@ -57,8 +58,6 @@ class DataRepository {
                 pokeMap[name] = pokemon
             }
             isInitialized = true
-        } else {
-            downloadJSON()
         }
     }
 
