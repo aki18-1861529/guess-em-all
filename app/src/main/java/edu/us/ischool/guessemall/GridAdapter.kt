@@ -2,6 +2,7 @@ package edu.us.ischool.guessemall
 
 
 import android.app.Activity
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -33,8 +34,10 @@ class GridHolder(card: View) : RecyclerView.ViewHolder(card) {
     fun bindModel(item: Pokemon, activity: Activity) {
         // getting data values for topic
         name!!.text = item.name
+        val sharedPreference = activity.getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
+        var caughtSet = sharedPreference.getStringSet("caught", mutableSetOf<String>())
         // get correct pokeball and sprite icon
-        if (item.caught == 0) {
+        if (!caughtSet!!.contains(item.number.toString())) {
             Log.i("TESTING", "not caught")
             pokeball?.setImageResource(R.drawable.undiscovered_pokeball)
             sprite?.setImageResource(R.drawable.undiscovered)
@@ -76,9 +79,12 @@ class GridAdapter(val activity: Activity) : RecyclerView.Adapter<GridHolder>() {
         // asks row holder to bind this data into its UI
         holder.bindModel(pokemon[position], activity)
 
+        val sharedPreference = activity.getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
+        var caughtSet = sharedPreference.getStringSet("caught", mutableSetOf<String>())
+
         // setting listener
         holder.cardBody?.setOnClickListener{
-            if (pokemon[position].caught == 0) {
+            if (!caughtSet!!.contains(pokemon[position].number.toString())) {
                 // lol can't get toast to work
                 Toast.makeText(it.context, "Pokemon not discovered!", Toast.LENGTH_SHORT).show()
                 Log.i("Data", "Not discovered")

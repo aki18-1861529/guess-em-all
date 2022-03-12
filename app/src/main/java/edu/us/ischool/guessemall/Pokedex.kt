@@ -13,13 +13,10 @@ class Pokedex : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pokedex)
 
-        var caughtCount = 0
-        val pokemon = App.data.getAllPokemon()
-        for (poke in pokemon) {
-            if (poke.caught == 1) {
-                caughtCount++
-            }
-        }
+        val sharedPreference = getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
+        var caughtSet = sharedPreference.getStringSet("caught", mutableSetOf<String>())
+        var caughtCount = caughtSet!!.size
+
         // idk how to format a string resource
         val countText = findViewById<TextView>(R.id.pokeCount)
         countText.text = "You have discovered " + caughtCount + " out of 151 Pokemon!"
