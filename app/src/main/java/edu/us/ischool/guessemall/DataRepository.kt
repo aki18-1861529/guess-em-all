@@ -82,6 +82,7 @@ class DataRepository {
             }
             result.close()
             output.close()
+            initData()
         }
     }
 
