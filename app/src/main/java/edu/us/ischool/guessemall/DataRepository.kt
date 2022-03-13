@@ -18,7 +18,7 @@ class DataRepository {
     private var pokeList: MutableList<Pokemon> = mutableListOf()
     var isInitialized: Boolean = false
 
-    init {
+    fun lateInit() {
         downloadJSON()
         initData()
     }
@@ -29,6 +29,7 @@ class DataRepository {
 
         // if the file exists, create list of Pokemon
         if (file.exists()) {
+            Log.i("TESTING", "initializing")
             val fileText = file.inputStream().readBytes().toString(Charsets.UTF_8)
 
             val data = JSONArray(fileText)
@@ -64,6 +65,7 @@ class DataRepository {
     // download data from JSON file
     private fun downloadJSON() {
         val t = thread {
+            Log.i("TESTING", "downloading JSON")
             val server = URL("https://gist.githubusercontent.com/corinzarkowski/e59261a8d5728a11793b4c38186a2924/raw/8ee43e439eb0b0f732d6d30b5a9572470b0852fd/pokemonlist.json")
             val client: HttpURLConnection = server.openConnection() as HttpURLConnection
             client.requestMethod = "GET"
