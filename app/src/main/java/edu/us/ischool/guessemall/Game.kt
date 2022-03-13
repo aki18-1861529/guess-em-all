@@ -37,7 +37,7 @@ class Game : AppCompatActivity() {
         // Get a reference to the AutoCompleteTextView in the layout
         val textView = findViewById(R.id.tvAutoComplete_Pokemon) as AutoCompleteTextView
         // Get the string array through DataRepository class
-        val data = DataRepository()
+        val data = App.data
         // Create the adapter and set it to the AutoCompleteTextView
         ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data.getAllNames()).also { adapter ->
             textView.setAdapter(adapter)

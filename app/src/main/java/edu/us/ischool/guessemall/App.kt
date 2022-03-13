@@ -10,7 +10,6 @@ class App : Application() {
 
     }
 
-
     companion object {
         val data = DataRepository()
     }
