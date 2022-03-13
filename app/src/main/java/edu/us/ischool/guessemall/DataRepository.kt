@@ -10,6 +10,8 @@ import java.io.InputStreamReader
 import java.io.Serializable
 import java.net.HttpURLConnection
 import java.net.URL
+import java.util.*
+import kotlin.collections.HashMap
 import kotlin.concurrent.thread
 
 // json data link https://gist.githubusercontent.com/LukeDors/7a205e5f0458ed4ac5c265efc5c2e69b/raw/366f098a96cc510c37ec7577b45e8518c5a251a2/pokemon.json
@@ -22,7 +24,6 @@ class DataRepository {
         pokeList = mutableListOf()
         pokeMap = hashMapOf()
         downloadJSON()
-        initData()
     }
 
     // initialize list of pokemon data
@@ -32,7 +33,7 @@ class DataRepository {
         val file = File(Environment.getExternalStorageDirectory().path, "pokemon.json")
 
         // if the file exists, create list of Pokemon
-        if (file.exists()) {
+        if (file.exists() && pokeList.isEmpty()) {
             Log.i("TESTING", "initializing")
             val fileText = file.inputStream().readBytes().toString(Charsets.UTF_8)
 

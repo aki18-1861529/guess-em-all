@@ -35,11 +35,9 @@ class GridHolder(card: View) : RecyclerView.ViewHolder(card) {
         var caughtSet = sharedPreference.getStringSet("caught", mutableSetOf<String>())
         // get correct pokeball and sprite icon
         if (!caughtSet!!.contains(item.number.toString())) {
-            Log.i("TESTING", "not caught")
             pokeball?.setImageResource(R.drawable.undiscovered_pokeball)
             sprite?.setImageResource(R.drawable.undiscovered)
         } else {
-            Log.i("TESTING", item.toString())
             pokeball?.setImageResource(R.drawable.mini_pokeball)
             // used third party library Glide to parse and display url images
             Glide.with(activity).load(item.sprite).into(sprite!!)
