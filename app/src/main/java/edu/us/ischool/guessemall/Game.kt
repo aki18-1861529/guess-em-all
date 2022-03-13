@@ -25,11 +25,11 @@ class Game : AppCompatActivity() {
         if (mode == "daily") {
             // pick daily
             val dateSeed = LocalDateTime.now().dayOfYear + LocalDateTime.now().year
-            pokemon = pokemonList[Random(dateSeed).nextInt(0, 150)]
+            pokemon = pokemonList[Random(dateSeed).nextInt(0, 897)]
             Log.i("TESTING", pokemon.toString())
         } else {
             // pick random pokemon
-            pokemon = pokemonList[Random.nextInt(0, 150)]
+            pokemon = pokemonList[Random.nextInt(0, 897)]
             Log.i("TESTING", pokemon.toString())
         }
 
@@ -100,7 +100,28 @@ class Game : AppCompatActivity() {
                 Toast.makeText(this, "Correct Number of Evolutions", Toast.LENGTH_SHORT).show()
                 val newImg = "correct_evo_" + pokemon.evos.toString()
                 findViewById<ImageView>(R.id.imgGuessEvo).setImageResource(resources.getIdentifier(newImg, "drawable", this.packageName))
-            } else if (partBtn.text == "Guess Generation" && spinnerAnswer == "Gen I: Red/Blue/Yellow") {
+            } else if (partBtn.text == "Guess Generation" && spinnerAnswer == "Gen I: Red/Blue/Yellow" && pokemon.number <= 151) {
+                Toast.makeText(this, "Correct Generation", Toast.LENGTH_SHORT).show()
+                findViewById<ImageView>(R.id.imgGuessGen).setImageResource(R.drawable.correct_gen_i)
+            } else if (partBtn.text == "Guess Generation" && spinnerAnswer == "Gen II: Gold/Silver/Crystal" && pokemon.number >= 152 && pokemon.number <= 251) {
+                Toast.makeText(this, "Correct Generation", Toast.LENGTH_SHORT).show()
+                findViewById<ImageView>(R.id.imgGuessGen).setImageResource(R.drawable.correct_gen_i)
+            } else if (partBtn.text == "Guess Generation" && spinnerAnswer == "Gen III: Ruby/Sapphire/Emerald" && pokemon.number >= 252 && pokemon.number <= 386) {
+                Toast.makeText(this, "Correct Generation", Toast.LENGTH_SHORT).show()
+                findViewById<ImageView>(R.id.imgGuessGen).setImageResource(R.drawable.correct_gen_i)
+            } else if (partBtn.text == "Guess Generation" && spinnerAnswer == "Gen IV: Diamond/Pearl/Platinum" && pokemon.number >= 387 && pokemon.number <= 493) {
+                Toast.makeText(this, "Correct Generation", Toast.LENGTH_SHORT).show()
+                findViewById<ImageView>(R.id.imgGuessGen).setImageResource(R.drawable.correct_gen_i)
+            } else if (partBtn.text == "Guess Generation" && spinnerAnswer == "Gen V: Black/White" && pokemon.number >= 494 && pokemon.number <= 649) {
+                Toast.makeText(this, "Correct Generation", Toast.LENGTH_SHORT).show()
+                findViewById<ImageView>(R.id.imgGuessGen).setImageResource(R.drawable.correct_gen_i)
+            } else if (partBtn.text == "Guess Generation" && spinnerAnswer == "Gen VI: X/Y" && pokemon.number >= 650 && pokemon.number <= 721) {
+                Toast.makeText(this, "Correct Generation", Toast.LENGTH_SHORT).show()
+                findViewById<ImageView>(R.id.imgGuessGen).setImageResource(R.drawable.correct_gen_i)
+            } else if (partBtn.text == "Guess Generation" && spinnerAnswer == "Gen VII: Sun/Moon" && pokemon.number >= 722 && pokemon.number <= 809) {
+                Toast.makeText(this, "Correct Generation", Toast.LENGTH_SHORT).show()
+                findViewById<ImageView>(R.id.imgGuessGen).setImageResource(R.drawable.correct_gen_i)
+            } else if (partBtn.text == "Guess Generation" && spinnerAnswer == "Gen VIII: Sword/Shield" && pokemon.number >= 810 && pokemon.number <= 898) {
                 Toast.makeText(this, "Correct Generation", Toast.LENGTH_SHORT).show()
                 findViewById<ImageView>(R.id.imgGuessGen).setImageResource(R.drawable.correct_gen_i)
             } else {

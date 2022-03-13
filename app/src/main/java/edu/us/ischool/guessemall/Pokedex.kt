@@ -19,7 +19,7 @@ class Pokedex : AppCompatActivity() {
 
         // idk how to format a string resource
         val countText = findViewById<TextView>(R.id.pokeCount)
-        countText.text = "You have discovered " + caughtCount + " out of 151 Pokemon!"
+        countText.text = "You have discovered " + caughtCount + " out of 898 Pokemon!"
 
         // bind adapter to the RecyclerView class
         pokeGrid = findViewById(R.id.pokegrid)
