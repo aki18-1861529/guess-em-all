@@ -31,6 +31,11 @@ class PokedexEntry : AppCompatActivity() {
         val type1: ImageView = findViewById(R.id.imgType1)
         val time: TextView = findViewById(R.id.time)
 
+        if (timeVal != null) {
+            time.text = time.text.toString() + " " + timeVal
+            time.isVisible = true
+        }
+
         // setting view content
         // used third party library Glide to parse and display url images
         Glide.with(this).load(pokemon!!.sprite).into(sprite)
@@ -39,8 +44,6 @@ class PokedexEntry : AppCompatActivity() {
         height.text = "${pokemon.height.toDouble() / 10} m"
         weight.text = "${pokemon.weight.toDouble() / 10} kg"
         desc.text = pokemon.desc
-        time.text = time.text.toString() + " " + timeVal
-        time.isVisible = true
 
         // adding the type images and handling multiple types
         type1.setImageResource(getResources().getIdentifier(pokemon.types[0], "drawable", getPackageName()));

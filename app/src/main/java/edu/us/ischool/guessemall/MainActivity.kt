@@ -8,10 +8,14 @@ import android.os.Bundle
 import android.telephony.SmsManager
 import android.util.Log
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.view.isVisible
 import java.io.File
+import java.time.LocalDateTime
 import java.util.*
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
@@ -43,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         findViewById<Button>(R.id.btnStartGame).isEnabled = false
         findViewById<Button>(R.id.btnPokedex).isEnabled = false
         findViewById<Button>(R.id.btnDaily).isEnabled = false
-        Toast.makeText(applicationContext, "Loading...", Toast.LENGTH_SHORT).show()
+        findViewById<TextView>(R.id.dailyDone).isVisible = false
         val messageTimer = Timer()
         messageTimer.schedule(object : TimerTask() {
             override fun run() {
@@ -52,15 +56,28 @@ class MainActivity : AppCompatActivity() {
                     this@MainActivity.runOnUiThread(java.lang.Runnable {
                         findViewById<Button>(R.id.btnStartGame).isEnabled = true
                         findViewById<Button>(R.id.btnPokedex).isEnabled = true
-                        findViewById<Button>(R.id.btnDaily).isEnabled = true
-                        Toast.makeText(applicationContext, "Finished loading", Toast.LENGTH_SHORT).show()
                     })
+
                     // update list of caught pokemon
                     val sharedPreference = getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
                     var caughtSet = sharedPreference.getStringSet("caught", mutableSetOf<String>())
                     if (caughtSet != null) {
                         App.data.refreshCaught(caughtSet)
                     }
+
+                    // check if daily is already played
+                    val dateSeed = LocalDateTime.now().dayOfYear + LocalDateTime.now().year
+                    val dailySet = sharedPreference.getStringSet("dailies", mutableSetOf<String>())
+                    if (dailySet != null && !dailySet.contains(dateSeed.toString())) {
+                        this@MainActivity.runOnUiThread(java.lang.Runnable {
+                            findViewById<Button>(R.id.btnDaily).isEnabled = true
+                        })
+                    } else {
+                        this@MainActivity.runOnUiThread(java.lang.Runnable {
+                            findViewById<TextView>(R.id.dailyDone).isVisible = true
+                        })
+                    }
+
                     this.cancel()
                 }
             }

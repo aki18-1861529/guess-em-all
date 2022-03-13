@@ -150,19 +150,30 @@ class Game : AppCompatActivity() {
                 }
 
                 // update caught pokemon
-                var caughtSet = sharedPreference.getStringSet("caughtSet", mutableSetOf<String>())
+                var caughtSet = sharedPreference.getStringSet("caught", mutableSetOf<String>())
                 if (caughtSet != null) {
                     if (!caughtSet.contains(pokemon.number.toString())) {
+                        Log.i("TESTING", caughtSet.toString())
                         caughtSet.add(pokemon.number.toString())
                         App.data.addAsCaught(pokemon.number)
                         editor.putStringSet("caught", caughtSet)
                     }
                 }
 
+                // update dailies if applicable
+                if (mode == "daily") {
+                    var dailySet = sharedPreference.getStringSet("dailies", mutableSetOf<String>())
+                    if (dailySet != null) {
+                        val dateSeed = LocalDateTime.now().dayOfYear + LocalDateTime.now().year
+                        dailySet.add(dateSeed.toString())
+                        editor.putStringSet("dailies", dailySet)
+                    }
+                }
+
                 editor.commit()
 
                 val intent = Intent(this, PokedexEntry::class.java)
-                intent.putExtra("pokemon", textView.text.toString())
+                intent.putExtra("EXTRA_NAME", textView.text.toString())
                 intent.putExtra("time", DateUtils.formatElapsedTime(elapsedSeconds.toLong()))
                 startActivity(intent)
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
