@@ -27,38 +27,35 @@ class DataRepository {
     private fun initData() {
         val file = File(Environment.getExternalStorageDirectory().path, "pokemon.json")
 
-        // if the file exists, create list of Pokemon
-        if (file.exists()) {
-            val fileText = file.inputStream().readBytes().toString(Charsets.UTF_8)
+        val fileText = file.inputStream().readBytes().toString(Charsets.UTF_8)
 
-            val data = JSONArray(fileText)
-            for (i in 0..(data.length() - 1)) {
-                val pokemonObj = data.getJSONObject(i)
-                val typeListObj = pokemonObj.getJSONArray("types")
-                val typeList = arrayListOf<String>()
-                for (j in 0..(typeListObj.length() - 1)) {
-                    typeList.add(typeListObj[j] as String)
-                }
-
-
-                var name = pokemonObj.getString("name")[0].uppercase() + pokemonObj.getString("name").substring(1)
-                var pokemon : Pokemon = Pokemon(
-                    name,
-                    pokemonObj.getInt("id"),
-                    pokemonObj.getString("description").replace("\n"," "),
-                    pokemonObj.getInt("height"),
-                    pokemonObj.getInt("weight"),
-                    pokemonObj.getString("sprite"),
-                    typeList,
-                    pokemonObj.getInt("caught"),
-                    pokemonObj.getInt("evolutioncount")
-                )
-
-                pokeList.add(pokemon)
-                pokeMap[name] = pokemon
+        val data = JSONArray(fileText)
+        for (i in 0..(data.length() - 1)) {
+            val pokemonObj = data.getJSONObject(i)
+            val typeListObj = pokemonObj.getJSONArray("types")
+            val typeList = arrayListOf<String>()
+            for (j in 0..(typeListObj.length() - 1)) {
+                typeList.add(typeListObj[j] as String)
             }
-            isInitialized = true
+
+
+            var name = pokemonObj.getString("name")[0].uppercase() + pokemonObj.getString("name").substring(1)
+            var pokemon : Pokemon = Pokemon(
+                name,
+                pokemonObj.getInt("id"),
+                pokemonObj.getString("description").replace("\n"," "),
+                pokemonObj.getInt("height"),
+                pokemonObj.getInt("weight"),
+                pokemonObj.getString("sprite"),
+                typeList,
+                pokemonObj.getInt("caught"),
+                pokemonObj.getInt("evolutioncount")
+            )
+
+            pokeList.add(pokemon)
+            pokeMap[name] = pokemon
         }
+        isInitialized = true
     }
 
     // download data from JSON file

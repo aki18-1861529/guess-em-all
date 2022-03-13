@@ -4,9 +4,6 @@ package edu.us.ischool.guessemall
 import android.app.Activity
 import android.content.Context.MODE_PRIVATE
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup

@@ -7,6 +7,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         Log.i("GuessEmAll", "GuessEmAll is loaded and running!")
+
     }
 
 
