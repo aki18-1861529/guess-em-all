@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
+import android.text.Editable
+import android.text.TextWatcher
 import android.text.format.DateUtils
 import android.util.Log
 import android.widget.*
@@ -35,13 +37,33 @@ class Game : AppCompatActivity() {
 
         // fill in autocomplete options
         // Get a reference to the AutoCompleteTextView in the layout
-        val textView = findViewById(R.id.tvAutoComplete_Pokemon) as AutoCompleteTextView
+        val tvAutoCompletePokemon = findViewById<AutoCompleteTextView>(R.id.tvAutoComplete_Pokemon)
         // Get the string array through DataRepository class
         val data = App.data
         // Create the adapter and set it to the AutoCompleteTextView
         ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data.getAllNames()).also { adapter ->
-            textView.setAdapter(adapter)
+            tvAutoCompletePokemon.setAdapter(adapter)
         }
+
+        // disable Guess Pokemon button if no Pokemon name is given to guess
+        val btnGuessPokemon = findViewById<Button>(R.id.btnGuessPokemon)
+        tvAutoCompletePokemon.addTextChangedListener(object: TextWatcher {
+            override fun onTextChanged(s:CharSequence, start:Int, before:Int, count:Int) {
+                if (s.toString().trim({ it <= ' ' }).isEmpty())
+                {
+                    btnGuessPokemon.setEnabled(false)
+                }
+                else
+                {
+                    btnGuessPokemon.setEnabled(true)
+                }
+            }
+            override fun beforeTextChanged(s:CharSequence, start:Int, count:Int,
+                                           after:Int) {
+            }
+            override fun afterTextChanged(s: Editable) {
+            }
+        })
 
         // fill in spinner options (default: Generation)
         val spinner: Spinner = findViewById(R.id.spinner)
@@ -97,7 +119,7 @@ class Game : AppCompatActivity() {
                 val newImg = "correct_type_" + pokemon.types[1]
                 findViewById<ImageView>(R.id.imgGuessType2).setImageResource(resources.getIdentifier(newImg, "drawable", this.packageName))
             } else if (partBtn.text == "Guess Evolution" && spinnerAnswer.last().toString() == pokemon.evos.toString()) {
-                Toast.makeText(this, "Correct Number of Evolutions", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Correct Stage of Evolution", Toast.LENGTH_SHORT).show()
                 val newImg = "correct_evo_" + pokemon.evos.toString()
                 findViewById<ImageView>(R.id.imgGuessEvo).setImageResource(resources.getIdentifier(newImg, "drawable", this.packageName))
             } else if (partBtn.text == "Guess Generation" && spinnerAnswer == "Gen I: Red/Blue/Yellow" && pokemon.number <= 151) {
@@ -130,9 +152,9 @@ class Game : AppCompatActivity() {
         }
 
         // Show results page with pokemon stats
-        findViewById<Button>(R.id.btnGuessPokemon).setOnClickListener {
+        btnGuessPokemon.setOnClickListener {
             // check if the guessed pokemon is correct
-            if (pokemon.name.replaceFirstChar { it.titlecase() } == textView.text.toString()) {
+            if (pokemon.name.replaceFirstChar { it.titlecase() } == tvAutoCompletePokemon.text.toString()) {
                 // calculate elapsed time in seconds
                 val tEnd = System.currentTimeMillis()
                 val tDelta = tEnd - tStart
@@ -208,9 +230,10 @@ class Game : AppCompatActivity() {
                 editor.commit()
 
                 val intent = Intent(this, PokedexEntry::class.java)
-                intent.putExtra("EXTRA_NAME", textView.text.toString())
+                intent.putExtra("EXTRA_NAME", tvAutoCompletePokemon.text.toString())
                 intent.putExtra("time", DateUtils.formatElapsedTime(elapsedSeconds.toLong()))
                 startActivity(intent)
+                this.finish()
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             } else {
                 Toast.makeText(this, "Incorrect Guess, Try Again", Toast.LENGTH_SHORT).show()

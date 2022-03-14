@@ -42,11 +42,12 @@
         android:id="@+id/btnGuessPokemon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:enabled="false"
         android:text="@string/game_btn_guess_pokemon"
-        app:layout_constraintTop_toBottomOf="@id/tvAutoComplete_Pokemon"
         app:layout_constraintBottom_toTopOf="@id/divider"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvAutoComplete_Pokemon" />
 
     <View
         android:id="@+id/divider"
