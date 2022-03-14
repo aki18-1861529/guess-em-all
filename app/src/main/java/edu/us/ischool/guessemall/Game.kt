@@ -191,10 +191,12 @@ class Game : AppCompatActivity() {
                     if (elapsedSeconds < currBestTime) {
                         editor.putLong("bestTime", elapsedSeconds.toLong())
                         editor.putString("fastestFound", pokemon.name.replaceFirstChar { it.titlecase() })
+                        editor.putString("fastestFoundImg", pokemon!!.sprite)
                     }
                 } else {
                     editor.putLong("bestTime", elapsedSeconds.toLong())
                     editor.putString("fastestFound", pokemon.name.replaceFirstChar { it.titlecase() })
+                    editor.putString("fastestFoundImg", pokemon!!.sprite)
                 }
 
                 // update slowest time
@@ -203,10 +205,12 @@ class Game : AppCompatActivity() {
                     if (elapsedSeconds > currSlowestTime) {
                         editor.putLong("slowestTime", elapsedSeconds.toLong())
                         editor.putString("slowestFound", pokemon.name.replaceFirstChar { it.titlecase() })
+                        editor.putString("slowestFoundImg", pokemon!!.sprite)
                     }
                 } else {
                     editor.putLong("slowestTime", elapsedSeconds.toLong())
                     editor.putString("slowestFound", pokemon.name.replaceFirstChar { it.titlecase() })
+                    editor.putString("slowestFoundImg", pokemon!!.sprite)
                 }
 
                 // update caught pokemon
