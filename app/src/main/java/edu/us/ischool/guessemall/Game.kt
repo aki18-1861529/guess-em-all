@@ -1,6 +1,8 @@
 package edu.us.ischool.guessemall
 
+import android.app.AlertDialog
 import android.app.Dialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -284,8 +286,19 @@ class Game : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        val builder = AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setMessage("Do you want to return to the main menu? \nCurrent game progress will be lost.");
+        builder.setPositiveButton("Yes") {
+            _, _ ->
+            super.onBackPressed()
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        }
+        builder.setNegativeButton("No") {
+            Dialog, _ -> Dialog.cancel()
+        }
+        val alert = builder.create()
+        alert.show()
     }
 
     // handles all the code for the help menu dialog
