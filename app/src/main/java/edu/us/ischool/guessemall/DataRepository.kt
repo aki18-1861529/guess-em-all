@@ -14,17 +14,21 @@ import kotlin.concurrent.thread
 
 // json data link https://gist.githubusercontent.com/corinzarkowski/e59261a8d5728a11793b4c38186a2924/raw/5af1cd35afc9e88b3804d7352b3c8216551ed387/pokemonlist.json
 class DataRepository {
-    private var pokeMap: HashMap<String, Pokemon> = hashMapOf()
-    private var pokeList: MutableList<Pokemon> = mutableListOf()
+    private lateinit var pokeMap: HashMap<String, Pokemon>
+    private lateinit var pokeList: MutableList<Pokemon>
     var isInitialized: Boolean = false
 
     fun lateInit() {
+        pokeList = mutableListOf()
+        pokeMap = hashMapOf()
         downloadJSON()
         initData()
     }
 
     // initialize list of pokemon data
     private fun initData() {
+        Log.i("Grid", "I am called")
+        Log.i("Grid", pokeList.size.toString())
         val file = File(Environment.getExternalStorageDirectory().path, "pokemon.json")
 
         // if the file exists, create list of Pokemon
@@ -79,7 +83,6 @@ class DataRepository {
             }
             result.close()
             output.close()
-            initData()
         }
     }
 
