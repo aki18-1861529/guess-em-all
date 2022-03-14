@@ -16,7 +16,9 @@ class GameStats : AppCompatActivity() {
         val totalTime = findViewById<TextView>(R.id.totalTime)
         val avgTime = findViewById<TextView>(R.id.avgTime)
         val bestTime = findViewById<TextView>(R.id.bestTime)
+        val fastestFound = findViewById<TextView>(R.id.fastestFound)
         val slowestTime = findViewById<TextView>(R.id.slowestTime)
+        val slowestFound = findViewById<TextView>(R.id.slowestFound)
 
         if (sharedPreference.getInt("totalGames", 0) != 0) {
             totalGames.text = sharedPreference.getInt("totalGames", 0).toString()
@@ -30,8 +32,14 @@ class GameStats : AppCompatActivity() {
         if (sharedPreference.getLong("bestTime", 0) != 0L) {
             bestTime.text = DateUtils.formatElapsedTime(sharedPreference.getLong("bestTime", 0))
         }
+        if (sharedPreference.getString("fastestFound", "") != "") {
+            fastestFound.text = sharedPreference.getString("fastestFound", "")
+        }
         if (sharedPreference.getLong("slowestTime", 0) != 0L) {
             slowestTime.text = DateUtils.formatElapsedTime(sharedPreference.getLong("slowestTime", 0))
+        }
+        if (sharedPreference.getString("slowestFound", "") != "") {
+            slowestFound.text = sharedPreference.getString("slowestFound", "")
         }
     }
 

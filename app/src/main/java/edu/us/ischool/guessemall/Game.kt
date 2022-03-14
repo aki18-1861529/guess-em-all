@@ -160,14 +160,16 @@ class Game : AppCompatActivity() {
                     editor.putLong("avgTime", totalTime)
                 }
 
-                // update best time
+                // update best time and fastest found pokemon
                 if (sharedPreference.getLong("bestTime", 0) != 0L) {
                     var currBestTime = sharedPreference.getLong("bestTime", 0)
                     if (elapsedSeconds < currBestTime) {
                         editor.putLong("bestTime", elapsedSeconds.toLong())
+                        editor.putString("fastestFound", pokemon.name.replaceFirstChar { it.titlecase() })
                     }
                 } else {
                     editor.putLong("bestTime", elapsedSeconds.toLong())
+                    editor.putString("fastestFound", pokemon.name.replaceFirstChar { it.titlecase() })
                 }
 
                 // update slowest time
@@ -175,9 +177,11 @@ class Game : AppCompatActivity() {
                     var currSlowestTime = sharedPreference.getLong("slowestTime", 0)
                     if (elapsedSeconds > currSlowestTime) {
                         editor.putLong("slowestTime", elapsedSeconds.toLong())
+                        editor.putString("slowestFound", pokemon.name.replaceFirstChar { it.titlecase() })
                     }
                 } else {
                     editor.putLong("slowestTime", elapsedSeconds.toLong())
+                    editor.putString("slowestFound", pokemon.name.replaceFirstChar { it.titlecase() })
                 }
 
                 // update caught pokemon

@@ -26,6 +26,8 @@
     <string name="slowest_time">Slowest Time</string>
     <string name="placeholder">----</string>
     <string name="game_statistics">Game Statistics</string>
+    <string name="fastest_found_pokemon">Fastest Found Pokemon</string>
+    <string name="slowest_found_pokemon">Slowest Found Pokemon</string>
     <string-array name="generations_array">
         <item>Gen I: Red/Blue/Yellow</item>
         <item>Gen II: Gold/Silver/Crystal</item>

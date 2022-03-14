@@ -70,10 +70,32 @@
                 android:layout_height="10dp" />
 
             <TextView
+                android:id="@+id/fastestFoundLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fastest_found_pokemon"
+                android:textSize="16sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <TextView
                 android:id="@+id/slowestTimeLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/slowest_time"
+                android:textSize="16sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <TextView
+                android:id="@+id/slowestFoundLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/slowest_found_pokemon"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -81,7 +103,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:orientation="vertical">
 
             <TextView
@@ -133,7 +155,31 @@
                 android:layout_height="10dp" />
 
             <TextView
+                android:id="@+id/fastestFound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/placeholder"
+                android:textAlignment="textEnd"
+                android:textSize="16sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <TextView
                 android:id="@+id/slowestTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/placeholder"
+                android:textAlignment="textEnd"
+                android:textSize="16sp" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <TextView
+                android:id="@+id/slowestFound"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/placeholder"
@@ -172,6 +218,7 @@
             android:id="@+id/imgDiscoveredStatus2"
             android:layout_width="25dp"
             android:layout_height="25dp"
+            android:contentDescription="Mini pokeball icon"
             app:srcCompat="@drawable/mini_pokeball" />
 
         <Space
