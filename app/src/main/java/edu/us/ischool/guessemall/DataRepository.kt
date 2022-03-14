@@ -12,7 +12,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 import kotlin.concurrent.thread
 
-// json data link https://gist.githubusercontent.com/LukeDors/7a205e5f0458ed4ac5c265efc5c2e69b/raw/3edcde314eabeba1f7134137fa3825419c6fa54a/pokemon.json
+// json data link https://gist.githubusercontent.com/LukeDors/7a205e5f0458ed4ac5c265efc5c2e69b/raw/366f098a96cc510c37ec7577b45e8518c5a251a2/pokemon.json
 class DataRepository {
     private lateinit var pokeMap: HashMap<String, Pokemon>
     private lateinit var pokeList: MutableList<Pokemon>
@@ -69,7 +69,7 @@ class DataRepository {
     private fun downloadJSON() {
         val t = thread {
             Log.i("TESTING", "downloading JSON")
-            val server = URL("https://gist.githubusercontent.com/LukeDors/7a205e5f0458ed4ac5c265efc5c2e69b/raw/3edcde314eabeba1f7134137fa3825419c6fa54a/pokemon.json")
+            val server = URL("https://gist.githubusercontent.com/LukeDors/7a205e5f0458ed4ac5c265efc5c2e69b/raw/366f098a96cc510c37ec7577b45e8518c5a251a2/pokemon.json")
             val client: HttpURLConnection = server.openConnection() as HttpURLConnection
             client.requestMethod = "GET"
             val filePath = File(Environment.getExternalStorageDirectory().path, "pokemon.json")
