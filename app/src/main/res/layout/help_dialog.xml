@@ -40,129 +40,173 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/step1"
-                android:layout_width="match_parent"
+            <ScrollView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="Guess a Pokemon correctly to catch it."
-                android:textSize="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/howTo"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/howTo" />
-
-            <TextView
-                android:id="@+id/step2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="16dp"
-                android:text="Guess the Pokemon's generation, types and evolution stage for some helpful hints."
-                android:textSize="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/step1" />
+                app:layout_constraintBottom_toBottomOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/step1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:textAlignment="center"
+                        android:text="@string/how_to_play1"
+                        android:textSize="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/step2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="16dp"
+                        android:textAlignment="center"
+                        android:text="@string/how_to_play2"
+                        android:textSize="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/step1" />
 
 
-            <ImageView
-                android:id="@+id/imgGuessGen"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:clickable="true"
-                app:layout_constraintEnd_toStartOf="@+id/imgGuessType1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/step2"
-                app:srcCompat="@drawable/question_ball" />
+                    <ImageView
+                        android:id="@+id/imgGuessGen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:clickable="true"
+                        app:layout_constraintEnd_toStartOf="@+id/imgGuessType1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/step2"
+                        app:srcCompat="@drawable/question_ball" />
 
-            <TextView
-                android:id="@+id/tvGuessGen"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/game_label_gen"
-                android:textSize="12dp"
-                app:layout_constraintTop_toBottomOf="@id/imgGuessGen"
-                app:layout_constraintStart_toStartOf="@id/imgGuessGen"
-                app:layout_constraintEnd_toEndOf="@id/imgGuessGen" />
+                    <TextView
+                        android:id="@+id/tvGuessGen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/game_label_gen"
+                        android:textSize="12dp"
+                        app:layout_constraintTop_toBottomOf="@id/imgGuessGen"
+                        app:layout_constraintStart_toStartOf="@id/imgGuessGen"
+                        app:layout_constraintEnd_toEndOf="@id/imgGuessGen" />
 
-            <ImageView
-                android:id="@+id/imgGuessType1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                app:layout_constraintEnd_toStartOf="@+id/imgGuessType2"
-                app:layout_constraintStart_toEndOf="@id/imgGuessGen"
-                app:layout_constraintTop_toBottomOf="@+id/step2"
-                app:srcCompat="@drawable/question_ball" />
+                    <ImageView
+                        android:id="@+id/imgGuessType1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        app:layout_constraintEnd_toStartOf="@+id/imgGuessType2"
+                        app:layout_constraintStart_toEndOf="@id/imgGuessGen"
+                        app:layout_constraintTop_toBottomOf="@+id/step2"
+                        app:srcCompat="@drawable/question_ball" />
 
-            <TextView
-                android:id="@+id/tvGuessType1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/game_label_t1"
-                android:textSize="12dp"
-                app:layout_constraintTop_toBottomOf="@id/imgGuessType1"
-                app:layout_constraintStart_toStartOf="@id/imgGuessType1"
-                app:layout_constraintEnd_toEndOf="@id/imgGuessType1" />
+                    <TextView
+                        android:id="@+id/tvGuessType1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/game_label_t1"
+                        android:textSize="12dp"
+                        app:layout_constraintTop_toBottomOf="@id/imgGuessType1"
+                        app:layout_constraintStart_toStartOf="@id/imgGuessType1"
+                        app:layout_constraintEnd_toEndOf="@id/imgGuessType1" />
 
-            <ImageView
-                android:id="@+id/imgGuessType2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                app:layout_constraintEnd_toStartOf="@+id/imgGuessEvo"
-                app:layout_constraintStart_toEndOf="@id/imgGuessType1"
-                app:layout_constraintTop_toBottomOf="@+id/step2"
-                app:srcCompat="@drawable/question_ball" />
+                    <ImageView
+                        android:id="@+id/imgGuessType2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        app:layout_constraintEnd_toStartOf="@+id/imgGuessEvo"
+                        app:layout_constraintStart_toEndOf="@id/imgGuessType1"
+                        app:layout_constraintTop_toBottomOf="@+id/step2"
+                        app:srcCompat="@drawable/question_ball" />
 
-            <TextView
-                android:id="@+id/tvGuessType2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/game_label_t2"
-                android:textSize="12dp"
-                app:layout_constraintTop_toBottomOf="@id/imgGuessType2"
-                app:layout_constraintStart_toStartOf="@id/imgGuessType2"
-                app:layout_constraintEnd_toEndOf="@id/imgGuessType2" />
+                    <TextView
+                        android:id="@+id/tvGuessType2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/game_label_t2"
+                        android:textSize="12dp"
+                        app:layout_constraintTop_toBottomOf="@id/imgGuessType2"
+                        app:layout_constraintStart_toStartOf="@id/imgGuessType2"
+                        app:layout_constraintEnd_toEndOf="@id/imgGuessType2" />
 
-            <ImageView
-                android:id="@+id/imgGuessEvo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                    <ImageView
+                        android:id="@+id/imgGuessEvo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/imgGuessType2"
+                        app:layout_constraintTop_toBottomOf="@+id/step2"
+                        app:srcCompat="@drawable/question_ball" />
 
-                android:layout_marginTop="12dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/imgGuessType2"
-                app:layout_constraintTop_toBottomOf="@+id/step2"
-                app:srcCompat="@drawable/question_ball" />
+                    <TextView
+                        android:id="@+id/tvGuessEvo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/game_label_evo"
+                        android:textSize="12dp"
+                        app:layout_constraintTop_toBottomOf="@id/imgGuessEvo"
+                        app:layout_constraintStart_toStartOf="@id/imgGuessEvo"
+                        app:layout_constraintEnd_toEndOf="@id/imgGuessEvo" />
 
-            <TextView
-                android:id="@+id/tvGuessEvo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/game_label_evo"
-                android:textSize="12dp"
-                app:layout_constraintTop_toBottomOf="@id/imgGuessEvo"
-                app:layout_constraintStart_toStartOf="@id/imgGuessEvo"
-                app:layout_constraintEnd_toEndOf="@id/imgGuessEvo" />
+                    <TextView
+                        android:id="@+id/step3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="16dp"
+                        android:textAlignment="center"
+                        android:text="@string/how_to_play3"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toTopOf="@id/step4"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvGuessGen" />
 
-            <TextView
-                android:id="@+id/step3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="24dp"
-                android:text="View all your caught Pokemon in your Pokedex and click on a Pokemon to view its information. Individual statistics can be viewed in the Game Statistics page."
-                android:textSize="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvGuessGen" />
+                    <TextView
+                        android:id="@+id/step4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="16dp"
+                        android:textAlignment="center"
+                        android:text="@string/how_to_play4"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toTopOf="@id/step5"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/step3" />
+
+                    <TextView
+                        android:id="@+id/step5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="24dp"
+                        android:textAlignment="center"
+                        android:text="@string/how_to_play5"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/step4" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </ScrollView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

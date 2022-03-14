@@ -145,7 +145,7 @@ class MainActivity : AppCompatActivity() {
                         findViewById<Button>(R.id.btnStartGame).isEnabled = true
                         findViewById<Button>(R.id.btnPokedex).isEnabled = true
                     })
-                    
+
                     // check if daily is already played
                     val sharedPreference = getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
                     val dateSeed = LocalDateTime.now().dayOfYear + LocalDateTime.now().year

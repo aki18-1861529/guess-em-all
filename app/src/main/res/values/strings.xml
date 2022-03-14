@@ -28,6 +28,11 @@
     <string name="game_statistics">Game Statistics</string>
     <string name="fastest_found_pokemon">Fastest Found Pokemon</string>
     <string name="slowest_found_pokemon">Slowest Found Pokemon</string>
+    <string name="how_to_play1">Guess a Pokémon correctly to catch it.</string>
+    <string name="how_to_play2">Gain hints by guessing the Pokémon\'s generation, types, and evolution stage.</string>
+    <string name="how_to_play3">View all your caught Pokémon in your Pokédex!</string>
+    <string name="how_to_play4">Tap a Pokémon to view its Pokédex entry.</string>
+    <string name="how_to_play5">Your gameplay statistics can be viewed on the Game Statistics page.</string>
     <string-array name="generations_array">
         <item>Gen I: Red/Blue/Yellow</item>
         <item>Gen II: Gold/Silver/Crystal</item>
