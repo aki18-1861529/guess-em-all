@@ -131,34 +131,39 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        if (App.data.isInitialized) {
-            // enable buttons
-            this@MainActivity.runOnUiThread(java.lang.Runnable {
-                findViewById<Button>(R.id.btnStartGame).isEnabled = true
-                findViewById<Button>(R.id.btnPokedex).isEnabled = true
-            })
+        // wait for data initialization to prevent crash
+        findViewById<Button>(R.id.btnStartGame).isEnabled = false
+        findViewById<Button>(R.id.btnPokedex).isEnabled = false
+        findViewById<Button>(R.id.btnDaily).isEnabled = false
+        findViewById<TextView>(R.id.dailyDone).isVisible = false
+        val messageTimer = Timer()
+        messageTimer.schedule(object : TimerTask() {
+            override fun run() {
+                if (App.data.isInitialized) {
+                    // enable buttons
+                    this@MainActivity.runOnUiThread(java.lang.Runnable {
+                        findViewById<Button>(R.id.btnStartGame).isEnabled = true
+                        findViewById<Button>(R.id.btnPokedex).isEnabled = true
+                    })
+                    
+                    // check if daily is already played
+                    val sharedPreference = getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
+                    val dateSeed = LocalDateTime.now().dayOfYear + LocalDateTime.now().year
+                    val dailySet = sharedPreference.getStringSet("dailies", mutableSetOf<String>())
+                    if (dailySet != null && !dailySet.contains(dateSeed.toString())) {
+                        this@MainActivity.runOnUiThread(java.lang.Runnable {
+                            findViewById<Button>(R.id.btnDaily).isEnabled = true
+                        })
+                    } else {
+                        this@MainActivity.runOnUiThread(java.lang.Runnable {
+                            findViewById<TextView>(R.id.dailyDone).isVisible = true
+                        })
+                    }
 
-            // update list of caught pokemon
-            val sharedPreference = getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
-            var caughtSet = sharedPreference.getStringSet("caught", mutableSetOf<String>())
-            if (caughtSet != null) {
-                App.data.refreshCaught(caughtSet)
+                    this.cancel()
+                }
             }
-
-            // check if daily is already played
-            val dateSeed = LocalDateTime.now().dayOfYear + LocalDateTime.now().year
-            val dailySet = sharedPreference.getStringSet("dailies", mutableSetOf<String>())
-            if (dailySet != null && !dailySet.contains(dateSeed.toString())) {
-                this@MainActivity.runOnUiThread(java.lang.Runnable {
-                    findViewById<Button>(R.id.btnDaily).isEnabled = true
-                })
-            } else {
-                this@MainActivity.runOnUiThread(java.lang.Runnable {
-                    findViewById<TextView>(R.id.dailyDone).isVisible = true
-                    findViewById<Button>(R.id.btnDaily).isEnabled = false
-                })
-            }
-        }
+        }, 0, 250)
     }
 
     // handles all the code for the help menu dialog
