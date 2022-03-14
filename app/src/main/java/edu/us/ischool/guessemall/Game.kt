@@ -1,6 +1,9 @@
 package edu.us.ischool.guessemall
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
@@ -8,6 +11,8 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.text.format.DateUtils
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import java.io.File
@@ -16,6 +21,7 @@ import java.util.*
 import kotlin.random.Random
 
 class Game : AppCompatActivity() {
+    lateinit var helpDialog : Dialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
@@ -23,6 +29,7 @@ class Game : AppCompatActivity() {
         // remove back button from action bar
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
+        helpDialog = Dialog(this)
         val tStart = System.currentTimeMillis()
 
         val pokemonList = App.data.getAllPokemon()
@@ -273,5 +280,36 @@ class Game : AppCompatActivity() {
     override fun onBackPressed() {
         super.onBackPressed()
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+    }
+
+    // handles all the code for the help menu dialog
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.status_actions, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_help -> {
+            // User chose the "Settings" item, show the app settings UI...
+            openHelpDialog()
+            true
+        }
+
+        else -> {
+            // If we got here, the user's action was not recognized.
+            // Invoke the superclass to handle it.
+            super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun openHelpDialog() : Unit {
+        helpDialog.setContentView(R.layout.help_dialog)
+        helpDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        var closeImg = helpDialog.findViewById<ImageView>(R.id.close_dialog)
+        closeImg.setOnClickListener {
+            helpDialog.dismiss()
+        }
+        helpDialog.show()
     }
 }
