@@ -30,6 +30,15 @@ class Game : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         helpDialog = Dialog(this)
+
+        val sharedPreference = getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
+        var editor = sharedPreference.edit()
+        if (sharedPreference.getBoolean("firstGame", true)) {
+            openHelpDialog()
+            editor.putBoolean("firstGame", false)
+            editor.commit()
+        }
+
         val tStart = System.currentTimeMillis()
 
         val pokemonList = App.data.getAllPokemon()
@@ -174,9 +183,6 @@ class Game : AppCompatActivity() {
                 val tDelta = tEnd - tStart
                 val elapsedSeconds = tDelta / 1000.0
                 var newBestTime = false
-
-                val sharedPreference = getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
-                var editor = sharedPreference.edit()
 
                 // increment total games and time
                 var total: Int = 1
