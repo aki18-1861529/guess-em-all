@@ -115,4 +115,37 @@ class MainActivity : AppCompatActivity() {
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (App.data.isInitialized) {
+            // enable buttons
+            this@MainActivity.runOnUiThread(java.lang.Runnable {
+                findViewById<Button>(R.id.btnStartGame).isEnabled = true
+                findViewById<Button>(R.id.btnPokedex).isEnabled = true
+            })
+
+            // update list of caught pokemon
+            val sharedPreference = getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
+            var caughtSet = sharedPreference.getStringSet("caught", mutableSetOf<String>())
+            if (caughtSet != null) {
+                App.data.refreshCaught(caughtSet)
+            }
+
+            // check if daily is already played
+            val dateSeed = LocalDateTime.now().dayOfYear + LocalDateTime.now().year
+            val dailySet = sharedPreference.getStringSet("dailies", mutableSetOf<String>())
+            if (dailySet != null && !dailySet.contains(dateSeed.toString())) {
+                this@MainActivity.runOnUiThread(java.lang.Runnable {
+                    findViewById<Button>(R.id.btnDaily).isEnabled = true
+                })
+            } else {
+                this@MainActivity.runOnUiThread(java.lang.Runnable {
+                    findViewById<TextView>(R.id.dailyDone).isVisible = true
+                    findViewById<Button>(R.id.btnDaily).isEnabled = false
+                })
+            }
+        }
+    }
 }
