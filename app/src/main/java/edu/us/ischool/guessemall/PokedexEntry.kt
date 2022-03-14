@@ -1,8 +1,10 @@
 package edu.us.ischool.guessemall
 
+import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
@@ -21,6 +23,7 @@ class PokedexEntry : AppCompatActivity() {
         val pokemon: Pokemon? = pIntent.extras?.getString("EXTRA_NAME")
             ?.let { App.data.getPokemon(it) }
         val timeVal = pIntent.extras?.getString("time")
+        val newBestTime = pIntent.extras?.getBoolean("newBestTime") as Boolean
 
         Log.i("TESTING", pokemon.toString())
 
@@ -37,6 +40,19 @@ class PokedexEntry : AppCompatActivity() {
         if (timeVal != null) {
             time.text = time.text.toString() + " " + timeVal
             time.isVisible = true
+
+            if (newBestTime) {
+                val builder = AlertDialog.Builder(this, R.style.CustomAlertDialog)
+                    .create()
+                val view = layoutInflater.inflate(R.layout.custom_alert_layout, null)
+                val button = view.findViewById<Button>(R.id.dialogDismiss_button)
+                builder.setView(view)
+                button.setOnClickListener {
+                    builder.dismiss()
+                }
+                builder.setCanceledOnTouchOutside(false)
+                builder.show()
+            }
         }
 
         // setting view content
