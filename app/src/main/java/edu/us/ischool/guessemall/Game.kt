@@ -261,8 +261,8 @@ class Game : AppCompatActivity() {
                 intent.putExtra("EXTRA_NAME", tvAutoCompletePokemon.text.toString())
                 intent.putExtra("time", DateUtils.formatElapsedTime(elapsedSeconds.toLong()))
                 intent.putExtra("newBestTime", newBestTime)
-                startActivity(intent)
                 this.finish()
+                startActivity(intent)
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
             } else {
                 Toast.makeText(this, "Incorrect Guess, Try Again", Toast.LENGTH_SHORT).show()
