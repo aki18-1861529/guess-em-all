@@ -8,6 +8,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.text.format.DateUtils
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import java.io.File
 import java.time.LocalDateTime
@@ -156,12 +157,16 @@ class Game : AppCompatActivity() {
 
         // Show results page with pokemon stats
         btnGuessPokemon.setOnClickListener {
+            val inputMethodManager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(it.windowToken, 0)
+
             // check if the guessed pokemon is correct
             if (pokemon.name.replaceFirstChar { it.titlecase() } == tvAutoCompletePokemon.text.toString()) {
                 // calculate elapsed time in seconds
                 val tEnd = System.currentTimeMillis()
                 val tDelta = tEnd - tStart
                 val elapsedSeconds = tDelta / 1000.0
+                var newBestTime = false
 
                 val sharedPreference = getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
                 var editor = sharedPreference.edit()
@@ -192,6 +197,7 @@ class Game : AppCompatActivity() {
                         editor.putLong("bestTime", elapsedSeconds.toLong())
                         editor.putString("fastestFound", pokemon.name.replaceFirstChar { it.titlecase() })
                         editor.putString("fastestFoundImg", pokemon!!.sprite)
+                        newBestTime = true
                     }
                 } else {
                     editor.putLong("bestTime", elapsedSeconds.toLong())
@@ -239,6 +245,7 @@ class Game : AppCompatActivity() {
                 val intent = Intent(this, PokedexEntry::class.java)
                 intent.putExtra("EXTRA_NAME", tvAutoCompletePokemon.text.toString())
                 intent.putExtra("time", DateUtils.formatElapsedTime(elapsedSeconds.toLong()))
+                intent.putExtra("newBestTime", newBestTime)
                 startActivity(intent)
                 this.finish()
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
