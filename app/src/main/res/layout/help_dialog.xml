@@ -157,7 +157,7 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="24dp"
-                android:text="View all your caught Pokemon in your Pokedex and your individual statistics in the Game Statistics page."
+                android:text="View all your caught Pokemon in your Pokedex and click on a Pokemon to view its information. Individual statistics can be viewed in the Game Statistics page."
                 android:textSize="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
