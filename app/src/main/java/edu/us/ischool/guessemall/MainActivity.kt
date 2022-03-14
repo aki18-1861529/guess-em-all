@@ -1,13 +1,19 @@
 package edu.us.ischool.guessemall
 
 import android.Manifest
+import android.app.AlertDialog
 import android.app.Dialog
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.telephony.SmsManager
 import android.util.Log
 import android.view.Menu
@@ -18,10 +24,62 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
+import androidx.fragment.app.DialogFragment
 import java.io.File
 import java.time.LocalDateTime
 import java.util.*
 import kotlin.random.Random
+import kotlin.system.exitProcess
+
+class NoConnectionDialogFragment : DialogFragment() {
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return activity?.let {
+            val builder = AlertDialog.Builder(it)
+            builder.setMessage("Internet connection is required to play.")
+                .setPositiveButton("Exit",
+                    DialogInterface.OnClickListener { dialog, id -> exitProcess(-1) })
+            builder.create()
+        } ?: throw IllegalStateException("Activity cannot be null")
+    }
+}
+
+class AirplaneModeDialogFragment : DialogFragment() {
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return activity?.let {
+            val builder = AlertDialog.Builder(it)
+            builder.setMessage("Internet connection is required to play. Disable airplane mode?")
+                .setPositiveButton("Yes",
+                    DialogInterface.OnClickListener { dialog, id ->
+                        startActivity(Intent(Settings.ACTION_AIRPLANE_MODE_SETTINGS))
+                    })
+                .setNegativeButton("Exit",
+                    DialogInterface.OnClickListener { dialog, id ->
+                        exitProcess(-1)
+                    })
+            // Create the AlertDialog object and return it
+            builder.create()
+        } ?: throw IllegalStateException("Activity cannot be null")
+    }
+}
+
+class NoPermissionsDialogFragment : DialogFragment() {
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return activity?.let {
+            val builder = AlertDialog.Builder(it)
+            builder.setMessage("App permissions must be enabled to play.")
+                .setPositiveButton("Settings",
+                    DialogInterface.OnClickListener { dialog, id ->
+                        startActivity(Intent(Settings.ACTION_SETTINGS))
+                    })
+                .setNegativeButton("Exit",
+                    DialogInterface.OnClickListener { dialog, id ->
+                        exitProcess(-1)
+                    })
+            // Create the AlertDialog object and return it
+            builder.create()
+        } ?: throw IllegalStateException("Activity cannot be null")
+    }
+}
 
 class MainActivity : AppCompatActivity() {
     // creating variable for help menu dialog
@@ -29,10 +87,47 @@ class MainActivity : AppCompatActivity() {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        // check connectivity
+        fun isOnline(context: Context): Boolean {
+            val connectivityManager =
+                context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            if (connectivityManager != null) {
+                val capabilities =
+                    connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+                if (capabilities != null) {
+                    if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR)) {
+                        Log.i("Internet", "NetworkCapabilities.TRANSPORT_CELLULAR")
+                        return true
+                    } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) {
+                        Log.i("Internet", "NetworkCapabilities.TRANSPORT_WIFI")
+                        return true
+                    } else if (capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)) {
+                        Log.i("Internet", "NetworkCapabilities.TRANSPORT_ETHERNET")
+                        return true
+                    }
+                }
+            }
+            return false
+        }
+
         when (requestCode) {
             1 -> {
-                if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    App.data.lateInit()
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (isOnline(this)) {
+                        App.data.lateInit()
+                    } else {
+                        if (Settings.System.getInt(contentResolver, Settings.Global.AIRPLANE_MODE_ON, 0) == 0) {
+                            val noConnectionAlert = NoConnectionDialogFragment()
+                            noConnectionAlert.show(supportFragmentManager, "no_connection")
+                        } else {
+                            val airplaneModeAlert = AirplaneModeDialogFragment()
+                            airplaneModeAlert.show(supportFragmentManager, "no_connection_airplane")
+                        }
+                    }
+                } else {
+                    val noConnectionAlert = NoPermissionsDialogFragment()
+                    noConnectionAlert.show(supportFragmentManager, "no_permissions")
                 }
             }
         }
@@ -50,6 +145,8 @@ class MainActivity : AppCompatActivity() {
             arrayOf(
                 Manifest.permission.READ_EXTERNAL_STORAGE,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_NETWORK_STATE,
+                Manifest.permission.ACCESS_WIFI_STATE,
                 Manifest.permission.INTERNET
             ),
             1
