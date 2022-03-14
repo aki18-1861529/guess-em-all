@@ -13,6 +13,9 @@ class Pokedex : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pokedex)
 
+        // remove back button from action bar
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
         val sharedPreference = getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
         var caughtSet = sharedPreference.getStringSet("caught", mutableSetOf<String>())
         var caughtCount = caughtSet!!.size

@@ -13,6 +13,9 @@ class PokedexEntry : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pokedex_entry)
 
+        // remove back button from action bar
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
         // getting intent from last activity and pokemon data
         val pIntent = this.intent
         val pokemon: Pokemon? = pIntent.extras?.getString("EXTRA_NAME")

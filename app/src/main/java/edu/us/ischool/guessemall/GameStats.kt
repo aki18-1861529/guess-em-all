@@ -11,6 +11,9 @@ class GameStats : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_stats)
 
+        // remove back button from action bar
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
         val sharedPreference =  getSharedPreferences("PREFERENCE_NAME", MODE_PRIVATE)
         val totalGames = findViewById<TextView>(R.id.totalGames)
         val totalTime = findViewById<TextView>(R.id.totalTime)

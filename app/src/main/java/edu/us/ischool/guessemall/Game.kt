@@ -19,6 +19,9 @@ class Game : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
+        // remove back button from action bar
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
         val tStart = System.currentTimeMillis()
 
         val pokemonList = App.data.getAllPokemon()
