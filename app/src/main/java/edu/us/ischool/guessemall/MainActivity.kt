@@ -1,13 +1,19 @@
 package edu.us.ischool.guessemall
 
 import android.Manifest
+import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.telephony.SmsManager
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -18,6 +24,9 @@ import java.util.*
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
+    // creating variable for help menu dialog
+    lateinit var helpDialog: Dialog
+
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
@@ -32,6 +41,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // initialize help dialog
+        helpDialog = Dialog(this)
 
         ActivityCompat.requestPermissions(
             this,
@@ -148,4 +160,36 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    // handles all the code for the help menu dialog
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.status_actions, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+        R.id.action_help -> {
+            // User chose the "Settings" item, show the app settings UI...
+            openHelpDialog()
+            true
+        }
+
+        else -> {
+            // If we got here, the user's action was not recognized.
+            // Invoke the superclass to handle it.
+            super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun openHelpDialog() : Unit {
+        helpDialog.setContentView(R.layout.help_dialog)
+        helpDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        var closeImg = helpDialog.findViewById<ImageView>(R.id.close_dialog)
+        closeImg.setOnClickListener {
+            helpDialog.dismiss()
+        }
+        helpDialog.show()
+    }
+
 }
