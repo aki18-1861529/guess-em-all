@@ -28,8 +28,6 @@ class DataRepository {
 
     // initialize list of pokemon data
     private fun initData() {
-        Log.i("Grid", "I am called")
-        Log.i("Grid", pokeList.size.toString())
         val file = File(Environment.getExternalStorageDirectory().path, "pokemon.json")
 
         // if the file exists, create list of Pokemon
